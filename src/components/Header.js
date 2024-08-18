@@ -9,6 +9,7 @@ const Header = () => {
         <h3>Kindergarden+</h3>
         <ul>
           <li className='anchor'>Home</li>
+          <li className='anchor'>About</li>
           <li className='anchor'>Services</li>
           <li className='anchor'>FAQ</li>
           <li className='anchor'>Contact</li>

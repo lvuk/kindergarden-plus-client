@@ -19,6 +19,8 @@ import {
   faBookOpen,
   faFileMedical,
   faInfo,
+  faLayerGroup,
+  faTabletScreenButton,
 } from '@fortawesome/free-solid-svg-icons';
 
 const Landing = () => {
@@ -43,6 +45,31 @@ const Landing = () => {
         </div>
         <br />
         <img src={image} alt='' className='dashboard-image' />
+      </div>
+      <div className='about'>
+        <div className='about-title'>
+          <h1>About</h1>
+        </div>
+        <div className='about-content'>
+          <div>
+            <h3>
+              Kindergarden+ is a digital platform that helps kindergartens
+              streamline communication and management. It's a simple, intuitive
+              tool that brings parents, educators, and administrators together
+              in one place.
+            </h3>
+            <FontAwesomeIcon icon={faLayerGroup} className='icon' />
+          </div>
+          <div>
+            <FontAwesomeIcon icon={faTabletScreenButton} className='icon' />
+            <h3>
+              With Kindergarden+, you can send real-time messages, manage
+              attendance, schedule events, and much more. It's the perfect way
+              to keep everyone in the loop and ensure that your kindergarten
+              runs smoothly.
+            </h3>
+          </div>
+        </div>
       </div>
       <div className='services'>
         <h1>Services</h1>
