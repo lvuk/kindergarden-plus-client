@@ -40,6 +40,12 @@ body {
 .content {
   background-color: $background-color;
   margin-left: 300px; /* Same as the sidebar width */
-  padding: 2rem;
+  padding: 3rem;
   width: calc(100% - 300px); /* Full width minus the sidebar width */
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

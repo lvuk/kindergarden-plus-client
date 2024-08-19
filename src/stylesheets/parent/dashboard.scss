@@ -1,0 +1,220 @@
+@import '../variables.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
+
+  .welcome-back {
+    display: flex;
+    justify-content: space-between;
+    background-color: $primary-color;
+    color: white;
+    padding: 1rem;
+    border-radius: 20px;
+    width: 100%;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    p {
+      font-size: 1.3rem;
+    }
+
+    // .lottie-balls {
+    //   background-color: white;
+    //   border-radius: 20px;
+    // }
+  }
+
+  /* Grid container styles */
+  /* Grid container styles */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); /* 3 columns of equal width */
+    grid-template-rows: repeat(
+      2,
+      auto
+    ); /* 2 rows that adjust based on content */
+    gap: 1rem; /* Space between grid items */
+    width: 100%;
+    margin-top: 3rem;
+    box-sizing: border-box;
+  }
+
+  /* Card-like grid items */
+  .grid-item {
+    background-color: #ffff; /* Background color for cards */
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: shadow for better visual */
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+  }
+
+  .grid-container .grid-item:nth-child(1) {
+    grid-column: span 4;
+    grid-row: span 1;
+  }
+
+  /* Make the second item (Events) larger */
+  .grid-container .grid-item:nth-child(2) {
+    grid-column: span 4; /* Span across 2 columns */
+    grid-row: span 1; /* Span across 2 rows */
+  }
+
+  .grid-container .grid-item:nth-child(3) {
+    grid-column: span 4;
+    grid-row: span 1;
+  }
+
+  .grid-item:nth-child(4) {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+
+  .grid-item:nth-child(5) {
+    grid-column: span 4;
+    grid-row: span 1;
+  }
+
+  .grid-item:nth-child(6) {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .event {
+    display: flex;
+    background-color: $background-color;
+    width: 100%;
+
+    h3 {
+      background-color: $primary-color;
+      color: white;
+      padding: 1rem;
+      margin-left: 1rem;
+      border-radius: 10px;
+    }
+
+    h4 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .event-content {
+      text-align: left;
+      margin: 1.5rem;
+    }
+  }
+
+  .notifications {
+    // max-height: 30vh;
+    width: 100%;
+    // overflow-y: scroll;
+
+    .notifications-container {
+      max-height: 25vh;
+      overflow-y: scroll;
+    }
+
+    .notification {
+      background-color: $background-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+      gap: 2rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+
+      h1 {
+        margin: 0;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .time {
+        color: gray;
+      }
+    }
+  }
+
+  .btn-payments {
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 1rem;
+    align-items: first baseline;
+  }
+
+  .next-payment-due {
+    padding: 1rem 0;
+    h5 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-decoration: underline;
+      font-weight: 400;
+    }
+  }
+
+  .resources-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 10vh;
+  }
+
+  .resource {
+    background-color: $background-color;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    gap: 1rem;
+
+    .resource-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 20px;
+      //   background-color: $primary-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h4,
+    p {
+      margin: 0;
+    }
+
+    p {
+      font-size: 0.7rem;
+    }
+
+    .resource-flex {
+      flex-direction: column;
+    }
+
+    .resource-description {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2; /* Number of lines to show */
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1rem; /* Adjust based on your line height */
+    }
+  }
+}
