@@ -39,10 +39,19 @@ header {
     transition: all 0.3s;
   }
 
+  // a:visited {
+  //   color: #000; /* Same as the normal state */
+  //   text-decoration: none; /* Same as the normal state */
+  // }
+
+  a:visited {
+    opacity: 1; /* Ensure full opacity */
+    background-color: transparent; /* Reset background color if it changes */
+  }
+
   .anchor {
     text-decoration: none;
-    color: $black-color;
-    opacity: 50%;
+    color: gray;
     align-items: center;
     margin: 0 1rem;
   }

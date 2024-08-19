@@ -8,12 +8,32 @@ const Header = () => {
       <div className='container'>
         <h3>Kindergarden+</h3>
         <ul>
-          <li className='anchor'>Home</li>
-          <li className='anchor'>About</li>
-          <li className='anchor'>Services</li>
-          <li className='anchor'>FAQ</li>
-          <li className='anchor'>Contact</li>
-          <Link to={'/login'} className='link signup-button'>
+          <li to={'/'}>
+            <a href='#home' className='anchor'>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href='#about' className='anchor'>
+              About
+            </a>
+          </li>
+          <li>
+            <a href='#services' className='anchor'>
+              Services
+            </a>
+          </li>
+          <li>
+            <a href='#FAQ' className='anchor'>
+              FAQ
+            </a>
+          </li>
+          <li>
+            <a href='#contact' className='anchor'>
+              Contact
+            </a>
+          </li>
+          <Link to={'/login'} className='signup-button'>
             Signup
           </Link>
         </ul>

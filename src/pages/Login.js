@@ -11,8 +11,8 @@ const Login = () => {
           <h1>Kindergarden+</h1>
           <h2>Login</h2>
           <form action='' className='form'>
-            <input type='text' placeholder='email' />
-            <input type='password' placeholder='password' />
+            <input type='text' placeholder='Email' />
+            <input type='password' placeholder='Password' />
             <button className='btn'>Login</button>
           </form>
         </div>

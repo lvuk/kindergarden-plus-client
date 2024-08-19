@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: column;
   width: 80vw;
-  height: 90vh;
+  height: 100vh;
   margin: 0.8rem auto;
 
   .background-lines {
@@ -58,6 +58,7 @@
 
   .dashboard-image {
     margin-top: 3rem;
+    width: 40vw;
     box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.5);
   }
 }
@@ -113,8 +114,9 @@
   //   align-items: center;
   text-align: center;
   background-color: $background-color;
-  height: 55vh;
+  height: 75vh;
   gap: 3rem;
+  padding-bottom: 1rem;
 
   h1 {
     color: $primary-color;

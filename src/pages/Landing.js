@@ -27,7 +27,7 @@ const Landing = () => {
   return (
     <>
       <Header />
-      <div className='landing-body'>
+      <div className='landing-body' id='home'>
         <div className='landing-statement'>
           <h1>
             <span>Revolutionize</span> collaboration with a simple, intuitive
@@ -46,7 +46,7 @@ const Landing = () => {
         <br />
         <img src={image} alt='' className='dashboard-image' />
       </div>
-      <div className='about'>
+      <div className='about' id='about'>
         <div className='about-title'>
           <h1>About</h1>
         </div>
@@ -71,7 +71,7 @@ const Landing = () => {
           </div>
         </div>
       </div>
-      <div className='services'>
+      <div className='services' id='services'>
         <h1>Services</h1>
         <div className='card-container'>
           <div className='card'>
