@@ -1,0 +1,26 @@
+@import '../variables.scss';
+
+.events {
+  .fc-button {
+    background-color: $primary-color;
+    border: none;
+  }
+
+  .fc-button:disabled {
+    background-color: $primary-color;
+    opacity: 50%;
+  }
+
+  .fc .fc-button-primary:not(:disabled).fc-button-active {
+    background-color: $primary-color;
+    opacity: 0.8;
+  }
+
+  .fc-event-title {
+    cursor: pointer;
+  }
+
+  .fc .fc-daygrid-day.fc-day-today {
+    background-color: rgb(230, 230, 230);
+  }
+}
