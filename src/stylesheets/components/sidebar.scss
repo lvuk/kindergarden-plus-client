@@ -2,12 +2,29 @@
 .sidebar {
   background-color: $primary-color;
   padding: 0; /* Ensure no extra padding on the sidebar itself */
+  overflow: scroll;
+
+  .dflex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hamburger-button {
+    font-size: 4rem;
+    // padding-top: 15px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
 
   h1 {
     color: white;
     font-size: 1.5rem;
     font-weight: 700;
     padding-left: 3rem;
+    // padding-top: 15px;
   }
 
   ul {
@@ -64,6 +81,9 @@
 
   .icon {
     margin-right: 1rem; /* Space between icon and text */
+    font-size: 1.5rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 
   .logout-link {

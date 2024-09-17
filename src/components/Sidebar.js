@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import '../stylesheets/components/sidebar.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightFromBracket,
+  faBars,
   faChildReaching,
   faClipboardList,
   faHouse,
@@ -16,9 +17,24 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 
 const Sidebar = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
+
   return (
-    <div className='sidebar'>
-      <h1>Kindergarden+</h1>
+    <div
+      className={
+        isExpanded ? 'sidebar-expanded sidebar' : 'sidebar-collapsed sidebar'
+      }
+    >
+      <div className='dflex'>
+        <h1>{isExpanded && 'Kindergarden+'}</h1>
+        <button className='hamburger-button' onClick={toggleSidebar}>
+          <FontAwesomeIcon icon={faBars} className='icon' />
+        </button>
+      </div>
       <ul>
         <li>
           <NavLink to='/dashboard'></NavLink>
@@ -26,49 +42,49 @@ const Sidebar = () => {
         <li>
           <NavLink to='/dashboard' className='link'>
             <FontAwesomeIcon icon={faHouse} className='icon' />
-            Dashboard
+            {isExpanded && 'Dashboard'}
           </NavLink>
         </li>
         <li>
           <NavLink to='/events' className='link'>
             <FontAwesomeIcon icon={faCalendar} className='icon' />
-            Events
+            {isExpanded && 'Events'}
           </NavLink>
         </li>
         <li>
           <NavLink to='/activities' className='link'>
             <FontAwesomeIcon icon={faClipboardList} className='icon' />
-            Activities
+            {isExpanded && 'Activities'}
           </NavLink>
         </li>
         <li>
           <NavLink to='/inbox' className='link'>
             <FontAwesomeIcon icon={faMessage} className='icon' />
-            Inbox
+            {isExpanded && 'Inbox'}
           </NavLink>
         </li>
         <li>
           <NavLink to='/resources' className='link'>
             <FontAwesomeIcon icon={faLightbulb} className='icon' />
-            Resources
+            {isExpanded && 'Resources'}
           </NavLink>
         </li>
         <li>
           <NavLink to='/payments' className='link'>
             <FontAwesomeIcon icon={faCreditCard} className='icon' />
-            Payments
+            {isExpanded && 'Payments'}
           </NavLink>
         </li>
         <li>
           <NavLink to='/profile' className='link'>
             <FontAwesomeIcon icon={faChildReaching} className='icon' />
-            Child Profile
+            {isExpanded && 'Child Profile'}
           </NavLink>
         </li>
         <li>
           <Link to='/login' className='logout-link'>
             <FontAwesomeIcon icon={faArrowRightFromBracket} className='icon' />
-            Logout
+            {isExpanded && 'Logout'}
           </Link>
         </li>
       </ul>
