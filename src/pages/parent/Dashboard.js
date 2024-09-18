@@ -21,7 +21,7 @@ const Dashboard = () => {
           size={1}
           className='lottie-balls'
         /> */}
-        <img src={image} alt='' />
+        <img src={image} alt='' className='welcome-back-img' />
       </div>
       <div className='grid-container'>
         <div className='grid-item'>

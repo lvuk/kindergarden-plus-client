@@ -28,6 +28,7 @@ body {
 
 .layout {
   display: flex;
+  height: 100vh;
 }
 
 .sidebar-expanded {
@@ -48,27 +49,90 @@ body {
   overflow: hidden; /* Ensures content stays within the sidebar */
 }
 
+// .sidebar-mobile {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: $primary-color;
+// }
+
+// .sidebar-mobile-expanded {
+// }
+
 .content-sidebar-collapsed {
   background-color: $background-color;
   margin-left: 100px; /* Same as the sidebar width */
-  height: 100%;
-  padding: 3rem;
+  height: auto;
+  padding: 2rem;
   width: calc(100% - 100px); /* Full width minus the sidebar width */
   transition: margin-left 0.3s ease, width 0.3s ease; /* Smooth transitions */
+  // overflow: hidden;
 }
 
 .content {
+  // margin: auto;
   background-color: $background-color;
   margin-left: 300px; /* Same as the sidebar width */
   height: 100%;
   padding: 3rem;
   width: calc(100% - 300px); /* Full width minus the sidebar width */
   transition: margin-left 0.3s ease, width 0.3s ease; /* Smooth transitions */
-  overflow: hidden; /* Ensures content stays within the sidebar */
+  // overflow: hidden; /* Ensures content stays within the sidebar */
+}
+
+.mobile-content {
+  padding: 2rem;
+  position: relative;
+  margin-top: 8rem;
 }
 
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Media Query for Mobile Devices (max-width 768px) */
+// @media (max-width: 768px) {
+//   /* Collapsing the sidebar */
+//   .sidebar-expanded {
+//     width: 80px;
+//   }
+
+//   .content {
+//     margin-left: 80px;
+//     width: calc(100% - 80px);
+//   }
+
+//   /* Adjust font sizes for smaller screens */
+//   h1,
+//   h2,
+//   h3,
+//   p {
+//     font-size: 90%;
+//   }
+
+//   /* Adjust padding for content */
+//   .content,
+//   .content-sidebar-collapsed {
+//     padding: 1rem;
+//   }
+// }
+
+@media (max-width: 1040px) {
+  .layout {
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout {
+    height: 10vh;
+    flex-direction: column;
+  }
+
+  .content .content-sidebar-collapsed {
+    width: 100%;
+    margin-left: 0;
+  }
 }
