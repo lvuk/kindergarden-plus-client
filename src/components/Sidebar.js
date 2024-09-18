@@ -16,11 +16,11 @@ import {
   faMessage,
 } from '@fortawesome/free-regular-svg-icons';
 
-const Sidebar = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+const Sidebar = ({ isExpanded, setIsExpanded }) => {
+  // const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = () => {
-    setIsExpanded((prevState) => !prevState);
+    setIsExpanded(!isExpanded);
   };
 
   return (

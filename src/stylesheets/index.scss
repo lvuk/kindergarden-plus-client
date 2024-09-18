@@ -44,6 +44,14 @@ body {
   position: fixed;
 }
 
+.content-sidebar-collapsed {
+  background-color: $background-color;
+  margin-left: 100px; /* Same as the sidebar width */
+  height: 100%;
+  padding: 3rem;
+  width: calc(100% - 100px); /* Full width minus the sidebar width */
+}
+
 .content {
   background-color: $background-color;
   margin-left: 300px; /* Same as the sidebar width */
