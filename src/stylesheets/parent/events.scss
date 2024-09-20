@@ -1,6 +1,14 @@
 @import '../variables.scss';
 
 .events {
+  .fc-col-header,
+  .fc-daygrid-body,
+  .fc-scrollgrid-sync-table,
+  .fc-timegrid-body,
+  .fc-timegrid-body table {
+    width: 100% !important;
+  }
+
   .fc-button {
     background-color: $primary-color;
     border: none;
@@ -22,5 +30,24 @@
 
   .fc .fc-daygrid-day.fc-day-today {
     background-color: rgb(230, 230, 230);
+  }
+
+  .fc-col-header-cell,
+  .fc-timegrid-axis,
+  .fc-timegrid-slot-label-cushion {
+    background-color: $primary-color;
+    color: white;
+    font-weight: 400;
+  }
+}
+
+@media (max-width: 768px) {
+  .events {
+    .fc .fc-header-toolbar {
+      // display: flex;
+      // flex-direction: column-reverse;
+      // gap: 1rem;
+      font-size: 0.7rem;
+    }
   }
 }

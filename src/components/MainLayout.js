@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import { Outlet } from 'react-router-dom';
 import '../stylesheets/index.scss';
+import { LayoutContext } from '../pages/context/LayoutContext';
 
 const MainLayout = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+
+  const checkWidth = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,6 +25,7 @@ const MainLayout = () => {
       }
     };
 
+    checkWidth();
     // Call handler immediately so state gets updated with initial window size
     handleResize();
 
@@ -33,25 +39,27 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <div className='layout'>
-      <Sidebar
-        isExpanded={isExpanded}
-        setIsExpanded={setIsExpanded}
-        isMobile={isMobile}
-        setIsMobile={setIsMobile}
-      />
-      <div
-        className={
-          isMobile
-            ? 'mobile-content'
-            : isExpanded
-            ? 'content'
-            : 'content-sidebar-collapsed'
-        }
-      >
-        <Outlet />
+    <LayoutContext.Provider value={{ isExpanded, isMobile }}>
+      <div className='layout'>
+        <Sidebar
+          isExpanded={isExpanded}
+          setIsExpanded={setIsExpanded}
+          isMobile={isMobile}
+          setIsMobile={setIsMobile}
+        />
+        <div
+          className={
+            isMobile
+              ? 'mobile-content'
+              : isExpanded
+              ? 'content'
+              : 'content-sidebar-collapsed'
+          }
+        >
+          <Outlet isExpanded={isExpanded} />
+        </div>
       </div>
-    </div>
+    </LayoutContext.Provider>
   );
 };
 

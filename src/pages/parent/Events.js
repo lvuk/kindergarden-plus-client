@@ -1,15 +1,17 @@
 /* eslint-disable no-undef */
 import '../../stylesheets/parent/events.scss';
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
 import dayGrid from '@fullcalendar/daygrid';
 import timeGrid from '@fullcalendar/timegrid';
+import { useLayoutContext } from '../context/LayoutContext';
 
 // const localizer = momentLocalizer(moment);
 
 const Events = () => {
+  const { isExpanded, isMobile } = useLayoutContext();
   const [events, setEvents] = useState([
     {
       id: 1,
@@ -19,9 +21,19 @@ const Events = () => {
     },
   ]);
 
+  const calendarRef = useRef(null);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      calendarRef.current.getApi().updateSize();
+      console.log(isExpanded);
+    }
+  }, [isExpanded]);
+
   return (
     <div className='events'>
       <FullCalendar
+        ref={calendarRef}
         plugins={[timeGrid, dayGrid]}
         initialView='dayGridMonth'
         fixedWeekCount={false}
@@ -30,7 +42,22 @@ const Events = () => {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek',
         }}
-        height={'90vh'}
+        overflow='auto'
+        titleFormat={{
+          month: 'long',
+          year: 'numeric',
+        }}
+        views={{
+          dayGridMonth: {
+            dayHeaderFormat: {
+              weekday: isMobile ? 'short' : isExpanded ? 'short' : 'long',
+            },
+          },
+          timeGridWeek: {
+            dayHeaderFormat: { weekday: 'short', day: 'numeric' },
+          },
+        }}
+        height={isMobile ? 'auto' : '90vh'}
         firstDay={1}
         nowIndicator={true}
         now={moment().format()}
