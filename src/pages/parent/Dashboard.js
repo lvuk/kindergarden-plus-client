@@ -10,7 +10,7 @@ const Dashboard = () => {
     <div className='container'>
       <div className='welcome-back'>
         <div>
-          <h1>Welcome back, Parent!</h1>
+          <h1>K+</h1>
           <p>
             Today is 19th of August, 2021. You have 3 new notifications and 2
             new messages.

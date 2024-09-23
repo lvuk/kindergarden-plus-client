@@ -1,4 +1,7 @@
 @import '../variables.scss';
+:root {
+  --fc-today-bg-color: rgb(235, 235, 235);
+}
 
 .events {
   .fc-col-header,
@@ -14,14 +17,39 @@
     border: none;
   }
 
+  .fc-button:hover {
+    background-color: $primary-color;
+    opacity: 0.5;
+    border: none;
+  }
+
+  .fc-button:active {
+    background-color: $primary-color;
+  }
+
+  .fc-button:focus {
+    box-shadow: none;
+  }
+
   .fc-button:disabled {
     background-color: $primary-color;
     opacity: 50%;
   }
 
   .fc .fc-button-primary:not(:disabled).fc-button-active {
-    background-color: $primary-color;
-    opacity: 0.8;
+    background-color: $background-color;
+    color: $primary-color;
+    border: 1px solid $primary-color;
+  }
+
+  .fc-button-primary:focus {
+    box-shadow: none !important;
+  }
+
+  .fc-button-primary:active {
+    background-color: $background-color;
+    color: $primary-color;
+    border: 1px solid $primary-color;
   }
 
   .fc-event-title {
@@ -29,7 +57,7 @@
   }
 
   .fc .fc-daygrid-day.fc-day-today {
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(235, 235, 235);
   }
 
   .fc-col-header-cell,

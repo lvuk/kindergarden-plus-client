@@ -74,7 +74,7 @@ body {
   background-color: $background-color;
   margin-left: 300px; /* Same as the sidebar width */
   height: 100%;
-  padding: 3rem;
+  padding: 2rem;
   width: calc(100% - 300px); /* Full width minus the sidebar width */
   transition: margin-left 0.3s ease, width 0.3s ease; /* Smooth transitions */
   // overflow: hidden; /* Ensures content stays within the sidebar */
