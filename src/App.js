@@ -4,18 +4,28 @@ import Login from './pages/Login';
 import Error404 from './pages/Error404';
 import MainLayout from './components/MainLayout';
 import ParentDashboard from './pages/parent/ParentDashboard';
-import Events from './pages/parent/Events';
+import Events from './pages/Events';
 import Activities from './pages/parent/Activities';
 import Feed from './pages/parent/Feed';
 import Payments from './pages/parent/Payments';
 import Profile from './pages/parent/ChildProfile';
-import Inbox from './pages/parent/Inbox';
+import Inbox from './pages/Inbox';
+import MyGroup from './pages/teacher/MyGroup';
+import Notes from './pages/teacher/Notes';
+import WorkLog from './pages/teacher/WorkLog';
+import ProfessionalProfile from './pages/teacher/ProfessionalProfile';
 import { useUserContext } from './pages/context/UserContext';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import ProtectedRoutes from './components/ProtectedRoute';
+import { useEffect } from 'react';
 
 function App() {
   const { user } = useUserContext();
+
+  useEffect(() => {
+    console.log(user);
+  });
+
   return (
     <div>
       <BrowserRouter>
@@ -29,18 +39,30 @@ function App() {
               <Route
                 path='dashboard'
                 element={
-                  user?.role === 'parent' || 'admin' ? (
-                    <ParentDashboard />
+                  user?.role === 'parent' || user?.role === 'admin' ? (
+                    (console.log('Parent Dashboard'), (<ParentDashboard />))
                   ) : (
                     <TeacherDashboard />
                   )
                 }
               />
             </Route>
-            <Route element={<ProtectedRoutes requiredRole={'admin'} />}>
-              <Route path='events' element={<Events />} />
+            <Route path='inbox' element={<Inbox />} />
+            <Route path='events' element={<Events />} />
+
+            {/* PROTECTED ROUTES FOR TEACHERS */}
+            <Route element={<ProtectedRoutes requiredRole={'teacher'} />}>
+              <Route path='my-group' element={<MyGroup />} />
+              <Route
+                path='professional-profile'
+                element={<ProfessionalProfile />}
+              />
+              <Route path='work-log' element={<WorkLog />} />
+              <Route path='notes' element={<Notes />} />
+            </Route>
+            {/* PROTECTED ROUTES FOR PARENTS */}
+            <Route element={<ProtectedRoutes requiredRole={'parent'} />}>
               <Route path='activities' element={<Activities />} />
-              <Route path='inbox' element={<Inbox />} />
               <Route path='resources' element={<Feed />} />
               <Route path='payments' element={<Payments />} />
               <Route path='profile' element={<Profile />} />

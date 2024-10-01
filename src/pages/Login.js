@@ -10,7 +10,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ role: 'admin', name: 'John Doe' });
+    login({ role: 'teacher', name: 'John Doe' });
 
     navigate('/dashboard');
   };
