@@ -42,7 +42,7 @@ const Events = () => {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek',
         }}
-        overflow='auto'
+        // overflow='auto'
         titleFormat={{
           month: 'long',
           year: 'numeric',

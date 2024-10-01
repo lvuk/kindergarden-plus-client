@@ -2,12 +2,16 @@ import React from 'react';
 import '../stylesheets/login.scss';
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
+import { useUserContext } from './context/UserContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useUserContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    login({ role: 'admin', name: 'John Doe' });
+
     navigate('/dashboard');
   };
 

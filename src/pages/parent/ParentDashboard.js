@@ -5,7 +5,7 @@ import mathimg from '../../assets/math.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-regular-svg-icons';
 
-const Dashboard = () => {
+const ParentDashboard = () => {
   return (
     <div className='container'>
       <div className='welcome-back'>
@@ -114,4 +114,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default ParentDashboard;
