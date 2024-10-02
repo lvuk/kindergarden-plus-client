@@ -1,0 +1,19 @@
+@import '../variables.scss';
+
+.mygroup {
+  .btn {
+    padding: 1rem 1rem !important;
+  }
+
+  .btn:hover {
+    background-color: $primary-color !important;
+    color: white !important;
+    cursor: pointer;
+  }
+
+  .table {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    overflow: hidden;
+  }
+}
