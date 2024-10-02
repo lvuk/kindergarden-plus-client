@@ -27,50 +27,48 @@ function App() {
   });
 
   return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Landing />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='*' element={<Error404 />} />
-          <Route path='/' element={<MainLayout />}>
-            {/* PROTECTED ROUTES FOR EVERYONE */}
-            <Route element={<ProtectedRoutes />}>
-              <Route
-                path='dashboard'
-                element={
-                  user?.role === 'parent' || user?.role === 'admin' ? (
-                    (console.log('Parent Dashboard'), (<ParentDashboard />))
-                  ) : (
-                    <TeacherDashboard />
-                  )
-                }
-              />
-            </Route>
-            <Route path='inbox' element={<Inbox />} />
-            <Route path='events' element={<Events />} />
-
-            {/* PROTECTED ROUTES FOR TEACHERS */}
-            <Route element={<ProtectedRoutes requiredRole={'teacher'} />}>
-              <Route path='my-group' element={<MyGroup />} />
-              <Route
-                path='professional-profile'
-                element={<ProfessionalProfile />}
-              />
-              <Route path='work-log' element={<WorkLog />} />
-              <Route path='notes' element={<Notes />} />
-            </Route>
-            {/* PROTECTED ROUTES FOR PARENTS */}
-            <Route element={<ProtectedRoutes requiredRole={'parent'} />}>
-              <Route path='activities' element={<Activities />} />
-              <Route path='resources' element={<Feed />} />
-              <Route path='payments' element={<Payments />} />
-              <Route path='profile' element={<Profile />} />
-            </Route>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Landing />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='*' element={<Error404 />} />
+        <Route path='/' element={<MainLayout />}>
+          {/* PROTECTED ROUTES FOR EVERYONE */}
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path='dashboard'
+              element={
+                user?.role === 'parent' || user?.role === 'admin' ? (
+                  (console.log('Parent Dashboard'), (<ParentDashboard />))
+                ) : (
+                  <TeacherDashboard />
+                )
+              }
+            />
           </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+          <Route path='inbox' element={<Inbox />} />
+          <Route path='events' element={<Events />} />
+
+          {/* PROTECTED ROUTES FOR TEACHERS */}
+          <Route element={<ProtectedRoutes requiredRole={'teacher'} />}>
+            <Route path='my-group' element={<MyGroup />} />
+            <Route
+              path='professional-profile'
+              element={<ProfessionalProfile />}
+            />
+            <Route path='work-log' element={<WorkLog />} />
+            <Route path='notes' element={<Notes />} />
+          </Route>
+          {/* PROTECTED ROUTES FOR PARENTS */}
+          <Route element={<ProtectedRoutes requiredRole={'parent'} />}>
+            <Route path='activities' element={<Activities />} />
+            <Route path='resources' element={<Feed />} />
+            <Route path='payments' element={<Payments />} />
+            <Route path='profile' element={<Profile />} />
+          </Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
