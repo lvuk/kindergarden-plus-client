@@ -9,12 +9,12 @@ import timeGrid from '@fullcalendar/timegrid';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { useLayoutContext } from './context/LayoutContext';
 import { useUserContext } from './context/UserContext';
-import { Button, Input, Modal, Space, Table, DatePicker, Form } from 'antd';
+import { Button, Modal, Space, Table } from 'antd';
 import { FaEdit } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import ModalFormEvents from '../components/ModalFormEvents';
 const { confirm } = Modal;
-const { RangePicker } = DatePicker;
 
 // const localizer = momentLocalizer(moment);
 
@@ -63,35 +63,6 @@ const Events = () => {
       ),
     },
   ];
-
-  const rangeConfig = {
-    rules: [
-      {
-        type: 'array',
-        required: true,
-        message: 'Enter the date range',
-      },
-    ],
-  };
-
-  const formItemLayout = {
-    labelCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 8,
-      },
-    },
-    wrapperCol: {
-      xs: {
-        span: 24,
-      },
-      sm: {
-        span: 16,
-      },
-    },
-  };
 
   const handleSave = () => {
     console.log('Save');
@@ -156,61 +127,15 @@ const Events = () => {
           <Table columns={columns} dataSource={events} />
         </div>
       )}
-      <Modal
-        title='Edit Event'
-        centered
-        open={isModalOpen}
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <Form
-          onFinish={onFinish}
-          initialValues={{
-            title: record?.title, // Set initial title value
-            'range-time-picker': record
-              ? [moment(record.start), moment(record.end)] // Set initial date range
-              : [], // Ensure a default empty value if no record
-          }}
-        >
-          <Form.Item
-            {...formItemLayout}
-            name='title'
-            label='Title'
-            rules={[
-              {
-                required: true,
-                message: "Title can't be empty",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            {...formItemLayout}
-            name='range-time-picker'
-            label='Period'
-            {...rangeConfig}
-          >
-            <RangePicker showTime format='YYYY-MM-DD HH:mm:ss' />
-          </Form.Item>
-          <Form.Item
-            wrapperCol={{
-              xs: {
-                span: 24,
-                offset: 0,
-              },
-              sm: {
-                span: 16,
-                offset: 8,
-              },
-            }}
-          >
-            <Button type='primary' htmlType='submit' className='btn-submit'>
-              Save
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+
+      <ModalFormEvents
+        handleCancel={handleCancel}
+        onFinish={onFinish}
+        isModalOpen={isModalOpen}
+        record={record}
+        setRecord={setRecord}
+      />
+
       <FullCalendar
         ref={calendarRef}
         plugins={[timeGrid, dayGrid]}
