@@ -18,6 +18,7 @@ import { useUserContext } from './pages/context/UserContext';
 import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import ProtectedRoutes from './components/ProtectedRoute';
 import { useEffect } from 'react';
+import Attendance from './pages/teacher/Attendance';
 
 function App() {
   const { user } = useUserContext();
@@ -56,6 +57,7 @@ function App() {
               path='professional-profile'
               element={<ProfessionalProfile />}
             />
+            <Route path='attendance' element={<Attendance />} />
             <Route path='work-log' element={<WorkLog />} />
             <Route path='notes' element={<Notes />} />
           </Route>

@@ -147,6 +147,17 @@ const Sidebar = ({
             </li>
             <li>
               <NavLink
+                to='/attendance'
+                className='link'
+                name='Attendance'
+                onClick={handleClick}
+              >
+                <FontAwesomeIcon icon={faClipboardList} className='icon' />
+                {isExpanded && 'Attendance'}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to='/notes'
                 className='link'
                 name='Notes'
