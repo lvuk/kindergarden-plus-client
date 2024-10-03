@@ -20,7 +20,13 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { useUserContext } from '../pages/context/UserContext';
 
-const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
+const Sidebar = ({
+  isExpanded,
+  setIsExpanded,
+  isMobile,
+  setIsMobile,
+  setActiveTab,
+}) => {
   // const [isExpanded, setIsExpanded] = useState(false);
   const { user, logout } = useUserContext();
 
@@ -28,8 +34,12 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
     setIsExpanded(!isExpanded);
   };
 
-  const handleClick = () => {
-    setIsExpanded(false);
+  const handleClick = (e) => {
+    console.log(e.currentTarget.getAttribute('name'));
+    if (isMobile) {
+      setIsExpanded(false); // Only collapse the sidebar if on mobile
+    }
+    setActiveTab(e.currentTarget.getAttribute('name'));
   };
 
   return (
@@ -52,13 +62,11 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
       </div>
       <ul>
         <li>
-          <NavLink to='/dashboard'></NavLink>
-        </li>
-        <li>
           <NavLink
             to='/dashboard'
             className='link'
-            onClick={isMobile && handleClick}
+            name='Dashboard'
+            onClick={handleClick}
           >
             <FontAwesomeIcon icon={faHouse} className='icon' />
             {isExpanded && 'Dashboard'}
@@ -68,7 +76,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
           <NavLink
             to='/events'
             className='link'
-            onClick={isMobile && handleClick}
+            name='Events'
+            onClick={handleClick}
           >
             <FontAwesomeIcon icon={faCalendar} className='icon' />
             {isExpanded && 'Events'}
@@ -81,7 +90,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
               <NavLink
                 to='/activities'
                 className='link'
-                onClick={isMobile && handleClick}
+                name='Activities'
+                onClick={handleClick}
               >
                 <FontAwesomeIcon icon={faClipboardList} className='icon' />
                 {isExpanded && 'Activities'}
@@ -91,7 +101,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
               <NavLink
                 to='/resources'
                 className='link'
-                onClick={isMobile && handleClick}
+                name='Resources'
+                onClick={handleClick}
               >
                 <FontAwesomeIcon icon={faLightbulb} className='icon' />
                 {isExpanded && 'Resources'}
@@ -101,7 +112,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
               <NavLink
                 to='/payments'
                 className='link'
-                onClick={isMobile && handleClick}
+                name='Payments'
+                onClick={handleClick}
               >
                 <FontAwesomeIcon icon={faCreditCard} className='icon' />
                 {isExpanded && 'Payments'}
@@ -111,7 +123,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
               <NavLink
                 to='/profile'
                 className='link'
-                onClick={isMobile && handleClick}
+                name='Profile'
+                onClick={handleClick}
               >
                 <FontAwesomeIcon icon={faChildReaching} className='icon' />
                 {isExpanded && 'Child Profile'}
@@ -125,7 +138,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
               <NavLink
                 to='/my-group'
                 className='link'
-                onClick={isMobile && handleClick}
+                name='My Group'
+                onClick={handleClick}
               >
                 <FontAwesomeIcon icon={faChildReaching} className='icon' />
                 {isExpanded && 'My Group'}
@@ -135,7 +149,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
               <NavLink
                 to='/notes'
                 className='link'
-                onClick={isMobile && handleClick}
+                name='Notes'
+                onClick={handleClick}
               >
                 <FontAwesomeIcon icon={faNoteSticky} className='icon' />
                 {isExpanded && 'Notes'}
@@ -145,7 +160,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
               <NavLink
                 to='/work-log'
                 className='link'
-                onClick={isMobile && handleClick}
+                name='Work Log'
+                onClick={handleClick}
               >
                 <FontAwesomeIcon icon={faBookOpen} className='icon' />
                 {isExpanded && 'Work Log'}
@@ -155,7 +171,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
               <NavLink
                 to='/professional-profile'
                 className='link'
-                onClick={isMobile && handleClick}
+                name='Professional Profile'
+                onClick={handleClick}
               >
                 <FontAwesomeIcon icon={faPortrait} className='icon' />
                 {isExpanded && 'Profile'}
@@ -167,7 +184,8 @@ const Sidebar = ({ isExpanded, setIsExpanded, isMobile, setIsMobile }) => {
           <NavLink
             to='/inbox'
             className='link'
-            onClick={isMobile && handleClick}
+            name='Inbox'
+            onClick={handleClick}
           >
             <FontAwesomeIcon icon={faMessage} className='icon' />
             {isExpanded && 'Inbox'}

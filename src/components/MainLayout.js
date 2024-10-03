@@ -3,10 +3,12 @@ import Sidebar from './Sidebar';
 import { Outlet } from 'react-router-dom';
 import '../stylesheets/index.scss';
 import { LayoutContext } from '../pages/context/LayoutContext';
+import ContentHeader from './ContentHeader';
 
 const MainLayout = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState('Dashboard');
 
   const checkWidth = () => {
     setIsMobile(window.innerWidth <= 768);
@@ -46,6 +48,7 @@ const MainLayout = () => {
           setIsExpanded={setIsExpanded}
           isMobile={isMobile}
           setIsMobile={setIsMobile}
+          setActiveTab={setActiveTab}
         />
         <div
           className={
@@ -56,6 +59,7 @@ const MainLayout = () => {
               : 'content-sidebar-collapsed'
           }
         >
+          <ContentHeader activeTab={activeTab} />
           <Outlet isExpanded={isExpanded} />
         </div>
       </div>

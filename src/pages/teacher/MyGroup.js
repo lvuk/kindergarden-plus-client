@@ -61,13 +61,13 @@ const MyGroup = () => {
       title: 'First Name',
       dataIndex: 'firstName',
       key: 'firstName',
-      sorter: (a, b) => a.firstName.localeCompare(b.firstName), // Corrected sorting
+      sorter: (a, b) => a.firstName.localeCompare(b.firstName),
     },
     {
       title: 'Last Name',
       dataIndex: 'lastName',
       key: 'lastName',
-      sorter: (a, b) => a.firstName.localeCompare(b.firstName), // Corrected sorting
+      sorter: (a, b) => a.lastName.localeCompare(b.lastName),
     },
     {
       title: 'Action',
@@ -86,7 +86,12 @@ const MyGroup = () => {
 
   return (
     <div className='mygroup'>
-      <Table dataSource={data} columns={columns} className='table' />
+      <Table
+        dataSource={data}
+        columns={columns}
+        className='table'
+        size='small'
+      />
     </div>
   );
 };

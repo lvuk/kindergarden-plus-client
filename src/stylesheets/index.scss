@@ -119,6 +119,19 @@ body {
 //   }
 // }
 
+.content-header {
+  hr {
+    // color: lightgray !important;
+    border: 0.5px solid lightgray !important;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-weight: 400;
+    margin-bottom: 0rem;
+  }
+}
+
 @media (max-width: 1040px) {
   .layout {
     height: auto;
