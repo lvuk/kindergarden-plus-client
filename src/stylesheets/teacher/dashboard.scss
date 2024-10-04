@@ -1,0 +1,62 @@
+@import '../_variables.scss';
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+
+  .grid-item {
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    grid-column: span 4;
+  }
+
+  .attendance,
+  .work-log,
+  .quick-note {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0rem;
+  }
+
+  .d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .lightgray {
+    color: gray;
+    opacity: 0.7;
+  }
+
+  .btn {
+    background-color: $primary-color;
+    color: white;
+  }
+
+  .btn:hover {
+    background-color: $primary-color !important;
+    color: white !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .grid-item {
+    grid-column: span 6 !important;
+  }
+}

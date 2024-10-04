@@ -210,6 +210,7 @@ const Attendance = () => {
         columns={columns}
         className={`table ${isHidden ? 'hidden' : ''}`}
         rowKey={'id'}
+        size='small'
       />
     </div>
   );
