@@ -8,6 +8,7 @@ import FullCalendar from '@fullcalendar/react';
 const TeacherDashboard = () => {
   const [api, contextHolder] = notification.useNotification();
   const [attendance, setAttendance] = useState({});
+  const [workLog, setWorkLog] = useState({});
 
   const openNotification = (event, placement) => {
     const formattedStart = formatEventDate(event.start);
@@ -73,12 +74,16 @@ const TeacherDashboard = () => {
       <div className='grid-item work-log'>
         <div className='d-flex'>
           <h3>Work Log</h3>
-          <p className='lightgray'>Don't forget todays attendance</p>
+          <p className='lightgray'>Don't forget todays work log</p>
         </div>
-        <Button className='btn'>
-          <FaPlus />
-          Create Work Log
-        </Button>
+        {workLog ? (
+          <Result status='success' title='You have entered todays work log' />
+        ) : (
+          <Button className='btn'>
+            <FaPlus />
+            Create Attendance
+          </Button>
+        )}
       </div>
       <div className='grid-item quick-note'>
         <h3>Quick Note</h3>

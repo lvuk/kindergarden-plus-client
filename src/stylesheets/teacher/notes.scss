@@ -1,0 +1,31 @@
+@import '../variables.scss';
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .btn {
+    padding: 1rem;
+    background-color: $primary-color;
+    color: white;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: white !important;
+      color: $primary-color !important;
+      transition: background-color 0.3s ease;
+    }
+  }
+
+  .btn-delete {
+    background-color: $red-color;
+    color: white;
+    border: 1px solid red;
+
+    &:hover {
+      background-color: white !important;
+      color: $red-color !important;
+      transition: background-color 0.3s ease;
+    }
+  }
+}
