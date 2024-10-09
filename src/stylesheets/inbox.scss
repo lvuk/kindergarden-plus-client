@@ -1,0 +1,32 @@
+@import '_variables.scss';
+
+.inbox {
+  display: flex;
+  gap: 1rem;
+  max-height: 87vh;
+}
+
+.inbox-list {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 360px;
+  gap: 1.3rem;
+}
+
+.inbox-list-item {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid gray;
+}
+
+.inbox-list-item-message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 30ch;
+}
