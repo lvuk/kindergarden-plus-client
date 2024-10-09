@@ -9,6 +9,7 @@ const MainLayout = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState('Dashboard');
+  const [error, setError] = useState(null);
 
   const checkWidth = () => {
     setIsMobile(window.innerWidth <= 768);
@@ -41,7 +42,7 @@ const MainLayout = () => {
   }, []);
 
   return (
-    <LayoutContext.Provider value={{ isExpanded, isMobile }}>
+    <LayoutContext.Provider value={{ isExpanded, isMobile, error, setError }}>
       <div className='layout'>
         <Sidebar
           isExpanded={isExpanded}

@@ -39,7 +39,7 @@ function App() {
             <Route
               path='dashboard'
               element={
-                user?.role === 'parent' || user?.role === 'admin' ? (
+                user?.role === 'PARENT' || user?.role === 'ADMIN' ? (
                   (console.log('Parent Dashboard'), (<ParentDashboard />))
                 ) : (
                   <TeacherDashboard />
@@ -51,7 +51,7 @@ function App() {
           <Route path='events' element={<Events />} />
 
           {/* PROTECTED ROUTES FOR TEACHERS */}
-          <Route element={<ProtectedRoutes requiredRole={'teacher'} />}>
+          <Route element={<ProtectedRoutes requiredRole={'TEACHER'} />}>
             <Route path='my-group' element={<MyGroup />} />
             <Route
               path='professional-profile'
@@ -62,7 +62,7 @@ function App() {
             <Route path='notes' element={<Notes />} />
           </Route>
           {/* PROTECTED ROUTES FOR PARENTS */}
-          <Route element={<ProtectedRoutes requiredRole={'parent'} />}>
+          <Route element={<ProtectedRoutes requiredRole={'PARENT'} />}>
             <Route path='activities' element={<Activities />} />
             <Route path='resources' element={<Feed />} />
             <Route path='payments' element={<Payments />} />

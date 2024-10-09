@@ -84,7 +84,7 @@ const Sidebar = ({
           </NavLink>
         </li>
 
-        {user?.role === 'parent' && (
+        {user?.role === 'PARENT' && (
           <>
             <li>
               <NavLink
@@ -132,7 +132,7 @@ const Sidebar = ({
             </li>
           </>
         )}
-        {user?.role === 'teacher' && (
+        {user?.role === 'TEACHER' && (
           <>
             <li>
               <NavLink
