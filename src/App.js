@@ -19,6 +19,13 @@ import TeacherDashboard from './pages/teacher/TeacherDashboard';
 import ProtectedRoutes from './components/ProtectedRoute';
 import { useEffect } from 'react';
 import Attendance from './pages/teacher/Attendance';
+import Employees from './pages/manager/Employees';
+import Children from './pages/manager/Children';
+import Attendances from './pages/manager/Attendances';
+import Groups from './pages/manager/Groups';
+import MyKindergarden from './pages/manager/MyKindergarden';
+import PedagogicalDocuments from './pages/manager/PedagogicalDocuments';
+import WorkDays from './pages/manager/WorkDays';
 
 function App() {
   const { user } = useUserContext();
@@ -35,7 +42,9 @@ function App() {
         <Route path='*' element={<Error404 />} />
         <Route path='/' element={<MainLayout />}>
           {/* PROTECTED ROUTES FOR EVERYONE */}
-          <Route element={<ProtectedRoutes />}>
+          <Route
+            element={<ProtectedRoutes requiredRole={'PARENT' || 'ADMIN'} />}
+          >
             <Route
               path='dashboard'
               element={
@@ -67,6 +76,20 @@ function App() {
             <Route path='resources' element={<Feed />} />
             <Route path='payments' element={<Payments />} />
             <Route path='profile' element={<Profile />} />
+          </Route>
+
+          {/* PROTECTED ROUTES FOR MANAGER */}
+          <Route element={<ProtectedRoutes requiredRole={'MANAGER'} />}>
+            <Route path='employees' element={<Employees />} />
+            <Route path='children' element={<Children />} />
+            <Route path='attendances' element={<Attendances />} />
+            <Route path='groups' element={<Groups />} />
+            <Route path='my-kindergarden' element={<MyKindergarden />} />
+            <Route
+              path='pedagogical-documents'
+              elements={<PedagogicalDocuments />}
+            />
+            <Route path='work-days' element={<WorkDays />} />
           </Route>
         </Route>
       </Routes>

@@ -6,11 +6,17 @@ import {
   faArrowRightFromBracket,
   faBars,
   faBookOpen,
+  faCalendarDays,
   faChildReaching,
+  faChildren,
   faClipboardList,
+  faFolderClosed,
   faHouse,
   faNoteSticky,
+  faPeopleGroup,
   faPortrait,
+  faSchoolFlag,
+  faUserFriends,
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faCalendar,
@@ -61,29 +67,89 @@ const Sidebar = ({
         </button>
       </div>
       <ul>
-        <li>
-          <NavLink
-            to='/dashboard'
-            className='link'
-            name='Dashboard'
-            onClick={handleClick}
-          >
-            <FontAwesomeIcon icon={faHouse} className='icon' />
-            {isExpanded && 'Dashboard'}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to='/events'
-            className='link'
-            name='Events'
-            onClick={handleClick}
-          >
-            <FontAwesomeIcon icon={faCalendar} className='icon' />
-            {isExpanded && 'Events'}
-          </NavLink>
-        </li>
-
+        {(user?.role === 'PARENT' || user?.role === 'TEACHER') && (
+          <li>
+            <NavLink
+              to='/dashboard'
+              className='link'
+              name='Dashboard'
+              onClick={handleClick}
+            >
+              <FontAwesomeIcon icon={faHouse} className='icon' />
+              {isExpanded && 'Dashboard'}
+            </NavLink>
+          </li>
+        )}
+        {user?.role === 'MANAGER' && (
+          <>
+            <li>
+              <NavLink
+                to='/employees'
+                className='link'
+                name='Employees'
+                onClick={handleClick}
+              >
+                <FontAwesomeIcon icon={faUserFriends} className='icon' />
+                {isExpanded && 'Employees'}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='/children'
+                className='link'
+                name='Children'
+                onClick={handleClick}
+              >
+                <FontAwesomeIcon icon={faChildren} className='icon' />
+                {isExpanded && 'Children'}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='/attendances'
+                className='link'
+                name='Attendances'
+                onClick={handleClick}
+              >
+                <FontAwesomeIcon icon={faCalendarDays} className='icon' />
+                {isExpanded && 'Attendances'}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='/groups'
+                className='link'
+                name='Groups'
+                onClick={handleClick}
+              >
+                <FontAwesomeIcon icon={faPeopleGroup} className='icon' />
+                {isExpanded && 'Groups'}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='/my-kindergarden'
+                className='link'
+                name='My Kindergarden'
+                onClick={handleClick}
+              >
+                <FontAwesomeIcon icon={faSchoolFlag} className='icon' />
+                {isExpanded && 'My Kindergarden'}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to='/pedagogical-documents'
+                className='link'
+                name='Pedagogical Docuements'
+                onClick={handleClick}
+              >
+                <FontAwesomeIcon icon={faFolderClosed} className='icon' />
+                {isExpanded && 'Pedagogical Documents'}
+              </NavLink>
+            </li>
+          </>
+        )}
         {user?.role === 'PARENT' && (
           <>
             <li>
@@ -191,6 +257,17 @@ const Sidebar = ({
             </li>
           </>
         )}
+        <li>
+          <NavLink
+            to='/events'
+            className='link'
+            name='Events'
+            onClick={handleClick}
+          >
+            <FontAwesomeIcon icon={faCalendar} className='icon' />
+            {isExpanded && 'Events'}
+          </NavLink>
+        </li>
         <li>
           <NavLink
             to='/inbox'

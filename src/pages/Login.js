@@ -10,7 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
   const { error } = useErrorContext();
-  const { login } = useUserContext();
+  const { login, user } = useUserContext();
   const [values, setValues] = useState({
     email: '',
     password: '',
@@ -31,7 +31,11 @@ const Login = () => {
       // Close loading message and show success
       messageApi.destroy(); // Clear the loading message
       message.success('Login successful!', 2.5);
-      navigate('/dashboard'); // Navigate to the dashboard
+      if (user.role === 'MANAGER') {
+        navigate('/employees');
+      } else {
+        navigate('/dashboard'); // Navigate to the dashboard
+      }
     } catch (error) {
       // Close loading message and show error
       messageApi.destroy(); // Clear the loading message

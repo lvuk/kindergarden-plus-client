@@ -21,8 +21,9 @@ export function UserProvider({ children }) {
     if (userCookie !== undefined) {
       const userData = JSON.parse(userCookie);
       setUser(userData); // Set user state if cookie exists
+    } else {
+      setUser(null);
     }
-    setUser(null);
     setLoading(false);
   }, []);
 
