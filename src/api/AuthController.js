@@ -14,16 +14,18 @@ const login = async (email, password) => {
     );
     return response;
   } catch (error) {
+    console.log('DOGODIO SE ERROR U AUTH');
     return { error: error.response.data.errors[0] };
   }
 };
 
 const logout = async () => {
+  console.log('uso u logout');
   try {
-    await axios.get('/auth/logout', null, { withCredentials: false });
+    await axios.delete('/auth/logout', { withCredentials: true });
     return true;
   } catch (error) {
-    return false;
+    return error;
   }
 };
 

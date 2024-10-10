@@ -18,6 +18,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // Show loading message
     messageApi.open({
       type: 'loading',
@@ -25,20 +26,24 @@ const Login = () => {
       duration: 0, // duration 0 means it won't auto close
     });
 
-    // Attempt to login
     try {
-      await login({ ...values });
+      // Perform login and get the response
+      const response = await login({ ...values });
+
       // Close loading message and show success
-      messageApi.destroy(); // Clear the loading message
+      messageApi.destroy();
       message.success('Login successful!', 2.5);
+
+      // Navigate based on user role in response
+      const { user } = response.data;
       if (user.role === 'MANAGER') {
         navigate('/employees');
       } else {
-        navigate('/dashboard'); // Navigate to the dashboard
+        navigate('/dashboard');
       }
     } catch (error) {
       // Close loading message and show error
-      messageApi.destroy(); // Clear the loading message
+      messageApi.destroy();
       message.error(`Login failed! ${error.message}`, 2.5);
     }
   };

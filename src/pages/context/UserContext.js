@@ -12,15 +12,14 @@ export const useUserContext = () => useContext(UserContext);
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const { setError } = useErrorContext();
 
   // Check for user cookie on initial render
   useEffect(() => {
     const userCookie = Cookies.get('user');
-    console.log(userCookie); // Get user from cookies
-    if (userCookie !== undefined) {
+    if (userCookie) {
       const userData = JSON.parse(userCookie);
-      setUser(userData); // Set user state if cookie exists
+      setUser(userData);
+      console.log('User loaded from cookies:', userData);
     } else {
       setUser(null);
     }
@@ -28,25 +27,26 @@ export function UserProvider({ children }) {
   }, []);
 
   const login = async ({ email, password }) => {
-    const response = await loginAPI(email, password);
+    const response = await loginAPI(email, password); // Do not wrap in try/catch
 
+    // Check for error in the response
     if (response.error) {
-      throw response.error;
+      throw response.error; // Throw the error to be caught in the UI
     }
-
-    Cookies.set('user', JSON.stringify(response.data.user), { expires: 2 }); // Set user cookie with expiry
+    // If there are no errors, proceed with setting user data
+    Cookies.set('user', JSON.stringify(response.data.user), { expires: 2 });
     setUser(response.data.user); // Set user state
+    return response;
   };
 
   const logout = async () => {
     await logoutAPI();
     setUser(null);
     Cookies.remove('user');
-    Cookies.remove('auth_token');
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </UserContext.Provider>
   );
