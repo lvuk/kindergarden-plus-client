@@ -4,14 +4,14 @@ import { Outlet } from 'react-router-dom';
 import '../stylesheets/index.scss';
 import { LayoutContext } from '../pages/context/LayoutContext';
 import ContentHeader from './ContentHeader';
-import { useUserContext } from '../pages/context/UserContext';
+import Cookies from 'js-cookie';
 
 const MainLayout = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState('Dashboard');
   const [error, setError] = useState(null);
-  const { user } = useUserContext();
+  const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
   const checkWidth = () => {
     setIsMobile(window.innerWidth <= 768);
@@ -30,7 +30,7 @@ const MainLayout = () => {
       }
     };
 
-    if (user.role === 'MANAGER') {
+    if (user?.role === 'MANAGER') {
       setActiveTab('Employees');
     }
 
