@@ -43,7 +43,7 @@ function App() {
         <Route path='/' element={<MainLayout />}>
           {/* PROTECTED ROUTES FOR EVERYONE */}
           <Route
-            element={<ProtectedRoutes requiredRole={'PARENT' || 'ADMIN'} />}
+            element={<ProtectedRoutes requiredRole={['PARENT', 'ADMIN']} />}
           >
             <Route
               path='dashboard'
@@ -59,19 +59,24 @@ function App() {
           <Route path='inbox' element={<Inbox />} />
           <Route path='events' element={<Events />} />
 
-          {/* PROTECTED ROUTES FOR TEACHERS */}
-          <Route element={<ProtectedRoutes requiredRole={'TEACHER'} />}>
-            <Route path='my-group' element={<MyGroup />} />
+          <Route
+            element={<ProtectedRoutes requiredRole={['TEACHER', 'MANAGER']} />}
+          >
             <Route
               path='professional-profile'
               element={<ProfessionalProfile />}
             />
+          </Route>
+
+          {/* PROTECTED ROUTES FOR TEACHERS */}
+          <Route element={<ProtectedRoutes requiredRole={['TEACHER']} />}>
+            <Route path='my-group' element={<MyGroup />} />
             <Route path='attendance' element={<Attendance />} />
             <Route path='work-log' element={<WorkLog />} />
             <Route path='notes' element={<Notes />} />
           </Route>
           {/* PROTECTED ROUTES FOR PARENTS */}
-          <Route element={<ProtectedRoutes requiredRole={'PARENT'} />}>
+          <Route element={<ProtectedRoutes requiredRole={['PARENT']} />}>
             <Route path='activities' element={<Activities />} />
             <Route path='resources' element={<Feed />} />
             <Route path='payments' element={<Payments />} />
@@ -79,7 +84,7 @@ function App() {
           </Route>
 
           {/* PROTECTED ROUTES FOR MANAGER */}
-          <Route element={<ProtectedRoutes requiredRole={'MANAGER'} />}>
+          <Route element={<ProtectedRoutes requiredRole={['MANAGER']} />}>
             <Route path='employees' element={<Employees />} />
             <Route path='children' element={<Children />} />
             <Route path='attendances' element={<Attendances />} />

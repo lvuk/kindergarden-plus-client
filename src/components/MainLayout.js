@@ -45,7 +45,7 @@ const MainLayout = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [user?.role]);
 
   return (
     <LayoutContext.Provider value={{ isExpanded, isMobile, error, setError }}>

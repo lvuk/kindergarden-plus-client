@@ -16,7 +16,7 @@ const ProtectedRoutes = ({ requiredRole }) => {
     return <Navigate to='/login' />; // Redirect to login if not authenticated
   }
 
-  if (requiredRole && user.role !== requiredRole) {
+  if (requiredRole.length !== 0 && !requiredRole.includes(user.role)) {
     return <Navigate to='/error' />; // Redirect if the role doesn't match
   }
 

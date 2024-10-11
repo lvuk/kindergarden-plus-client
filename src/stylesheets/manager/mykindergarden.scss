@@ -1,0 +1,24 @@
+@import '../variables.scss';
+
+.my-kindergarden {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  .btn {
+    background-color: $primary-color;
+    border: 1px solid $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: white !important;
+      color: $primary-color !important;
+    }
+  }
+
+  .kindergarden-info {
+    width: 100%;
+  }
+}

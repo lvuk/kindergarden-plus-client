@@ -1,0 +1,39 @@
+@import '../variables.scss';
+
+.groups {
+  .btn-edit {
+    background-color: $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: white !important;
+      color: $primary-color !important;
+      transition: background-color 0.3s ease;
+    }
+  }
+
+  .btn-delete {
+    background-color: $red-color;
+    color: white;
+    border: 1px solid red !important;
+
+    &:hover {
+      background-color: white !important;
+      color: $red-color !important;
+      transition: background-color 0.3s ease;
+    }
+  }
+}
+
+.btn {
+  padding: 1rem;
+  border: 1px solid $primary-color !important;
+  background-color: $primary-color;
+  color: white;
+
+  &:hover {
+    background-color: white !important;
+    color: $primary-color !important;
+    transition: background-color 0.3s ease;
+  }
+}
