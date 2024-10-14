@@ -122,7 +122,7 @@ const Events = () => {
 
   return (
     <div className='events'>
-      {user?.role === 'teacher' && (
+      {user?.role === 'TEACHER' && (
         <div className='my-events'>
           <Table columns={columns} dataSource={events} />
         </div>

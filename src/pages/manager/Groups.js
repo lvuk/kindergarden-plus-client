@@ -130,7 +130,7 @@ const Groups = () => {
           {...formItemLayout}
           form={form}
           initialValues={record}
-          layout='vertical'
+          layout='inline'
         >
           <Form.Item
             label='Name'

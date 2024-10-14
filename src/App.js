@@ -43,7 +43,7 @@ function App() {
         <Route path='/' element={<MainLayout />}>
           {/* PROTECTED ROUTES FOR EVERYONE */}
           <Route
-            element={<ProtectedRoutes requiredRole={['PARENT', 'ADMIN']} />}
+            element={<ProtectedRoutes requiredRole={['PARENT', 'TEACHER']} />}
           >
             <Route
               path='dashboard'

@@ -136,6 +136,13 @@ body {
     font-weight: 400;
     margin-bottom: 0rem;
   }
+
+  .content-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: first baseline;
+    margin-bottom: 1rem;
+  }
 }
 
 @media (max-width: 1040px) {
