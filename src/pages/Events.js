@@ -1,13 +1,13 @@
 /* eslint-disable no-undef */
 import '../stylesheets/parent/events.scss';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 // import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
 import dayGrid from '@fullcalendar/daygrid';
 import timeGrid from '@fullcalendar/timegrid';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-import { useLayoutContext } from './context/LayoutContext';
+import { LayoutContext, useLayoutContext } from './context/LayoutContext';
 import { useUserContext } from './context/UserContext';
 import { Button, Modal, Space, Table } from 'antd';
 import { FaEdit } from 'react-icons/fa';
@@ -22,7 +22,7 @@ const Events = () => {
   const { isExpanded, isMobile } = useLayoutContext();
   const { user } = useUserContext();
   const [record, setRecord] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, setIsModalOpen } = useContext(LayoutContext);
   const [events, setEvents] = useState([
     {
       id: 1,

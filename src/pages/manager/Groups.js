@@ -1,14 +1,16 @@
 import { Button, Space, Table, Modal, Form, Input } from 'antd';
 import '../../stylesheets/manager/groups.scss';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { FaTrashCan } from 'react-icons/fa6';
 import { ExclamationCircleFilled } from '@ant-design/icons';
+import { LayoutContext } from '../context/LayoutContext';
 const { confirm } = Modal;
 
 const Groups = () => {
   const [open, setOpen] = useState(false);
   const [record, setRecord] = useState(null);
+  const { activeTab, isModalOpen, setIsModalOpen } = useContext(LayoutContext);
   const [form] = Form.useForm(); // Create form instance
   const showModal = (record) => {
     setRecord(record);
@@ -35,6 +37,7 @@ const Groups = () => {
   const handleCancel = () => {
     form.resetFields(); // Reset form when modal is closed
     setOpen(false);
+    setIsModalOpen(false);
   };
 
   const columns = [
@@ -151,6 +154,16 @@ const Groups = () => {
           </Form.Item>
         </Form>
       </Modal>
+      {activeTab === 'Groups' && (
+        <Modal
+          open={isModalOpen}
+          title='Create new group'
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <p>GROUPS</p>
+        </Modal>
+      )}
     </div>
   );
 };

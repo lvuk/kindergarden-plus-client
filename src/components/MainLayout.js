@@ -11,11 +11,17 @@ const MainLayout = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState('Dashboard');
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const user = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null;
 
   const checkWidth = () => {
     setIsMobile(window.innerWidth <= 768);
   };
+
+  useEffect(() => {
+    // Reset modal state when tab changes
+    setIsModalOpen(false);
+  }, [activeTab]); // Every time activeTab changes, the modal closes
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,7 +54,17 @@ const MainLayout = () => {
   }, [user?.role]);
 
   return (
-    <LayoutContext.Provider value={{ isExpanded, isMobile, error, setError }}>
+    <LayoutContext.Provider
+      value={{
+        isExpanded,
+        isMobile,
+        error,
+        setError,
+        isModalOpen,
+        setIsModalOpen,
+        activeTab,
+      }}
+    >
       <div className='layout'>
         <Sidebar
           isExpanded={isExpanded}
@@ -67,7 +83,7 @@ const MainLayout = () => {
           }
         >
           <ContentHeader activeTab={activeTab} />
-          <Outlet isExpanded={isExpanded} />
+          <Outlet activeTab={activeTab} />
         </div>
       </div>
     </LayoutContext.Provider>

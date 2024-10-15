@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../stylesheets/manager/mykindergarden.scss';
-import { Avatar, Button, Descriptions } from 'antd';
+import { Avatar, Button, Descriptions, Modal } from 'antd';
 import { FaSchoolFlag } from 'react-icons/fa6';
+import { LayoutContext } from '../context/LayoutContext';
 
 const MyKindergarden = () => {
+  const { isModalOpen, setIsModalOpen, activeTab } = useContext(LayoutContext);
   const items = [
     {
       key: '1',
@@ -47,10 +49,17 @@ const MyKindergarden = () => {
     },
   ];
 
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <div className='my-kindergarden'>
       <Avatar size={256} icon={<FaSchoolFlag />} />
-      <Button className='btn' type='primary'>
+      <Button
+        className='btn'
+        type='primary'
+        onClick={() => setIsModalOpen(true)}
+      >
         Edit Kindergarden
       </Button>
       <Descriptions
@@ -59,6 +68,16 @@ const MyKindergarden = () => {
         className='kindergarden-info'
         items={items}
       />
+      {activeTab === 'My Kindergarden' && (
+        <Modal
+          open={isModalOpen}
+          title='Edit kindergarden'
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <p>KINDERGARDEn</p>
+        </Modal>
+      )}
     </div>
   );
 };

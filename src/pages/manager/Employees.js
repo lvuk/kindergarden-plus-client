@@ -1,11 +1,13 @@
-import { Button, Input, Space, Table, Tag } from 'antd';
-import React, { useRef, useState } from 'react';
+import { Button, Input, Modal, Space, Table, Tag } from 'antd';
+import React, { useContext, useRef, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
+import { LayoutContext } from '../context/LayoutContext';
 
 const Employees = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
+  const { activeTab, isModalOpen, setIsModalOpen } = useContext(LayoutContext);
   const searchInput = useRef(null);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -191,9 +193,23 @@ const Employees = () => {
     },
   ];
 
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className='employees'>
       <Table columns={columns} dataSource={data} className='table' />
+      {activeTab === 'Employees' && (
+        <Modal
+          open={isModalOpen}
+          title='Register'
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <p>EMPLOYEE</p>
+        </Modal>
+      )}
     </div>
   );
 };

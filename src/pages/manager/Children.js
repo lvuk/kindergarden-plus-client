@@ -1,12 +1,18 @@
-import { Button, Input, Space, Table, Tag } from 'antd';
-import React, { useRef, useState } from 'react';
+import { Button, Input, Modal, Space, Table, Tag } from 'antd';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
+import { LayoutContext } from '../context/LayoutContext';
 
 const Children = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
+  const { isModalOpen, setIsModalOpen, activeTab } = useContext(LayoutContext);
   const searchInput = useRef(null);
+
+  useEffect(() => {
+    setIsModalOpen(false);
+  }, []);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -167,9 +173,24 @@ const Children = () => {
       group: 'Tigers',
     },
   ];
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
       <Table columns={columns} dataSource={data} className='table' />
+      {activeTab === 'Children' && (
+        <Modal
+          open={isModalOpen}
+          title='Add new child'
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <p>CHILDREN</p>
+        </Modal>
+      )}
     </div>
   );
 };
