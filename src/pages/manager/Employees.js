@@ -1,5 +1,5 @@
-import { Button, Input, Modal, Space, Table, Tag } from 'antd';
-import React, { useContext, useRef, useState } from 'react';
+import { Button, Form, Input, Modal, Select, Space, Table, Tag } from 'antd';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { LayoutContext } from '../context/LayoutContext';
@@ -9,6 +9,7 @@ const Employees = () => {
   const [searchedColumn, setSearchedColumn] = useState('');
   const { activeTab, isModalOpen, setIsModalOpen } = useContext(LayoutContext);
   const searchInput = useRef(null);
+  const [form] = Form.useForm();
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -21,6 +22,17 @@ const Employees = () => {
     confirm();
   };
 
+  // FORM
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+  };
+
+  const handleSubmit = (values) => {
+    console.log(values);
+  };
+
+  // HARDCODED DATA
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -193,8 +205,23 @@ const Employees = () => {
     },
   ];
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
+  const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 6,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 14,
+      },
+    },
   };
 
   return (
@@ -206,8 +233,193 @@ const Employees = () => {
           title='Register'
           onCancel={handleCancel}
           footer={null}
+          maskClosable={false}
         >
-          <p>EMPLOYEE</p>
+          <Form
+            {...formItemLayout}
+            variant='filled'
+            onFinish={handleSubmit}
+            form={form}
+          >
+            <Form.Item
+              label='First Name'
+              name='firstName'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your first name!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label='Last Name'
+              name='lastName'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your last name!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label='PIN'
+              name='PIN'
+              rules={[
+                {
+                  required: true,
+                },
+                {
+                  pattern: /^[0-9]{11}$/,
+                  message: 'PIN must have 11 digits',
+                },
+              ]}
+            >
+              <Input type='' />
+            </Form.Item>
+
+            <Form.Item
+              label='Address'
+              name='address'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter employees address!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label='Phone number'
+              name='phoneNumber'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter employees phone number!',
+                },
+                {
+                  pattern: /^[0-9]/,
+                  message: 'Only digits are allowed',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label='Email'
+              name='email'
+              rules={[
+                {
+                  required: true,
+                  message: "Email can't be empty!",
+                },
+                {
+                  type: 'email',
+                  message: 'Please enter a valid email address!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label='Password'
+              name='password'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!',
+                },
+                {
+                  min: 8,
+                  message: 'Password must be at least 8 characters!',
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              label='Role'
+              name='role'
+              rules={[{ required: true, message: 'Please select a role!' }]}
+            >
+              <Select
+                style={{ width: 120 }}
+                options={[
+                  {
+                    value: 'TEACHER',
+                    label: 'Teacher',
+                  },
+                ]}
+              />
+            </Form.Item>
+
+            <Form.Item label='Kindergarden' name='kindergardenId'>
+              <Select
+                //OVO MORAS PROMIJENTI POSLIJE
+                style={{
+                  width: 120,
+                }}
+                options={[
+                  {
+                    value: 1,
+                    label: 'DV Osijek',
+                  },
+                ]}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label='Group'
+              name='groupId'
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Select
+                //OVO MORAS PROMIJENTI POSLIJE
+                style={{
+                  width: 120,
+                }}
+                options={[
+                  {
+                    value: 1,
+                    label: 'Zelena',
+                  },
+                  {
+                    value: '2',
+                    label: 'Zuta',
+                  },
+                  {
+                    value: '3',
+                    label: 'Bijela',
+                  },
+                ]}
+              />
+            </Form.Item>
+
+            <Form.Item
+              wrapperCol={{
+                offset: 6,
+                span: 14,
+              }}
+            >
+              <Button type='primary' htmlType='submit'>
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
         </Modal>
       )}
     </div>
