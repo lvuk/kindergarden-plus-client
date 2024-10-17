@@ -5,13 +5,16 @@ import { FaEdit } from 'react-icons/fa';
 import { FaTrashCan } from 'react-icons/fa6';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { LayoutContext } from '../context/LayoutContext';
+import DebounceSelect from '../../components/manager/DebounceSelect';
 const { confirm } = Modal;
 
 const Groups = () => {
   const [open, setOpen] = useState(false);
   const [record, setRecord] = useState(null);
   const { activeTab, isModalOpen, setIsModalOpen } = useContext(LayoutContext);
+  const [value, setValue] = useState([]);
   const [form] = Form.useForm(); // Create form instance
+  const [createForm] = Form.useForm(); // Create form instance
   const showModal = (record) => {
     setRecord(record);
     form.setFieldsValue(record); // Set form values when modal opens
@@ -120,6 +123,22 @@ const Groups = () => {
     },
   };
 
+  const handelNewGroupCancel = () => {
+    setIsModalOpen(false);
+    createForm.resetFields();
+  };
+
+  const fetchTeachersList = (lastName) => {
+    return fetch('https://randomuser.me/api/?results=5')
+      .then((response) => response.json())
+      .then((body) =>
+        body.results.map((user) => ({
+          label: `${user.name.first} ${user.name.last}`,
+          value: user.login.uuid,
+        }))
+      );
+  };
+
   return (
     <div className='groups'>
       <Table columns={columns} dataSource={data} className='table' />
@@ -158,10 +177,59 @@ const Groups = () => {
         <Modal
           open={isModalOpen}
           title='Create new group'
-          onCancel={handleCancel}
+          onCancel={handelNewGroupCancel}
           footer={null}
         >
-          <p>GROUPS</p>
+          <Form {...formItemLayout} open={isModalOpen} form={createForm}>
+            <Form.Item
+              label='Name'
+              name='name'
+              rules={[
+                {
+                  required: true,
+                  message: "Can't be empty!",
+                },
+              ]}
+            >
+              <Input placeholder='Enter group name' />
+            </Form.Item>
+
+            <Form.Item
+              name='parents'
+              label='Parents'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please select at least one teacher',
+                  type: 'array',
+                },
+              ]}
+            >
+              <DebounceSelect
+                mode='multiple'
+                value={value}
+                placeholder='Select parents'
+                fetchOptions={fetchTeachersList}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                style={{
+                  width: '100%',
+                }}
+              />
+            </Form.Item>
+
+            <Form.Item
+              wrapperCol={{
+                offset: 6,
+                span: 14,
+              }}
+            >
+              <Button type='primary' htmlType='submit'>
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
         </Modal>
       )}
     </div>
