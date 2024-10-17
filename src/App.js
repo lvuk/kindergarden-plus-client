@@ -92,7 +92,7 @@ function App() {
             <Route path='my-kindergarden' element={<MyKindergarden />} />
             <Route
               path='pedagogical-documents'
-              elements={<PedagogicalDocuments />}
+              element={<PedagogicalDocuments />}
             />
             <Route path='work-days' element={<WorkDays />} />
           </Route>
