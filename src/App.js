@@ -28,6 +28,8 @@ import PedagogicalDocuments from './pages/manager/PedagogicalDocuments';
 import WorkDays from './pages/manager/WorkDays';
 import EmployeeDetails from './pages/manager/details/EmployeeDetails';
 import ChildDetails from './pages/manager/details/ChildDetails';
+import GroupDetails from './pages/manager/details/GroupDetails';
+import PedagogicalDocumentDetails from './pages/manager/details/PedagogicalDocumentDetails';
 
 function App() {
   const { user } = useUserContext();
@@ -100,6 +102,11 @@ function App() {
             {/* DETAILS */}
             <Route path='employees/:id' element={<EmployeeDetails />} />
             <Route path='children/:id' element={<ChildDetails />} />
+            <Route path='groups/:id' element={<GroupDetails />} />
+            <Route
+              path='pedagogical-documents/:id'
+              element={<PedagogicalDocumentDetails />}
+            />
           </Route>
         </Route>
       </Routes>

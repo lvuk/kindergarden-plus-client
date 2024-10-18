@@ -1,10 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LayoutContext } from '../context/LayoutContext';
 import { Button, Empty, Form, Input, Modal, Select, Space, Table } from 'antd';
 import { FaEye } from 'react-icons/fa6';
 import '../../stylesheets/manager/pedagogical-documents.scss';
+import { useNavigate } from 'react-router-dom';
 
 const PedagogicalDocuments = () => {
+  const navigate = useNavigate();
+  const { setActiveTab } = useContext(LayoutContext);
+
+  useEffect(() => {
+    setActiveTab('Pedagogical Documents');
+  }, [setActiveTab]);
+
   const data = [
     {
       key: '1',
@@ -72,6 +80,12 @@ const PedagogicalDocuments = () => {
     setFilteredData(data); // Reset to original data
   };
 
+  const handleClick = (record) => {
+    navigate(`/pedagogical-documents/${record.key}`);
+    setActiveTab('Pedagogical Document');
+    console.log(record);
+  };
+
   return (
     <div className='pedagogical-documents'>
       <Form
@@ -120,6 +134,11 @@ const PedagogicalDocuments = () => {
           columns={columns}
           dataSource={filteredData.length ? filteredData : data}
           className='table'
+          onRow={(record) => {
+            return {
+              onClick: () => handleClick(record),
+            };
+          }}
         />
       ) : (
         <Empty className='empty table' />

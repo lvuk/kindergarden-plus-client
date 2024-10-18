@@ -1,11 +1,12 @@
 import { Button, Space, Table, Modal, Form, Input } from 'antd';
 import '../../stylesheets/manager/groups.scss';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaEdit } from 'react-icons/fa';
 import { FaTrashCan } from 'react-icons/fa6';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { LayoutContext } from '../context/LayoutContext';
 import DebounceSelect from '../../components/manager/DebounceSelect';
+import { useNavigate } from 'react-router-dom';
 const { confirm } = Modal;
 
 const Groups = () => {
@@ -13,6 +14,8 @@ const Groups = () => {
   const [record, setRecord] = useState(null);
   const { activeTab, isModalOpen, setIsModalOpen } = useContext(LayoutContext);
   const [value, setValue] = useState([]);
+  const navigate = useNavigate();
+  const { setActiveTab } = useContext(LayoutContext);
   const [form] = Form.useForm(); // Create form instance
   const [createForm] = Form.useForm(); // Create form instance
   const showModal = (record) => {
@@ -20,6 +23,10 @@ const Groups = () => {
     form.setFieldsValue(record); // Set form values when modal opens
     setOpen(true);
   };
+
+  useEffect(() => {
+    setActiveTab('Groups');
+  }, [setActiveTab]);
 
   const showDeleteConfirm = () => {
     confirm({
@@ -128,6 +135,12 @@ const Groups = () => {
     createForm.resetFields();
   };
 
+  const handleClick = (record) => {
+    navigate(`/groups/${record.key}`);
+    setActiveTab('Group');
+    console.log(record);
+  };
+
   const fetchTeachersList = (lastName) => {
     return fetch('https://randomuser.me/api/?results=5')
       .then((response) => response.json())
@@ -141,7 +154,16 @@ const Groups = () => {
 
   return (
     <div className='groups'>
-      <Table columns={columns} dataSource={data} className='table' />
+      <Table
+        columns={columns}
+        dataSource={data}
+        className='table'
+        onRow={(record) => {
+          return {
+            onClick: () => handleClick(record),
+          };
+        }}
+      />
       <Modal
         open={open}
         title='Edit Group'
