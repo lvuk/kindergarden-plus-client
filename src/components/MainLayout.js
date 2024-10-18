@@ -63,6 +63,7 @@ const MainLayout = () => {
         isModalOpen,
         setIsModalOpen,
         activeTab,
+        setActiveTab,
       }}
     >
       <div className='layout'>
@@ -83,7 +84,7 @@ const MainLayout = () => {
           }
         >
           <ContentHeader activeTab={activeTab} />
-          <Outlet activeTab={activeTab} />
+          <Outlet activeTab={activeTab} setActiveTab={setActiveTab} />
         </div>
       </div>
     </LayoutContext.Provider>

@@ -5,25 +5,6 @@ import { FaEye } from 'react-icons/fa6';
 import '../../stylesheets/manager/pedagogical-documents.scss';
 
 const PedagogicalDocuments = () => {
-  const [form] = Form.useForm();
-  const [filteredData, setFilteredData] = useState([]);
-  const columns = [
-    { title: 'Group', dataIndex: 'group', key: 'group', width: '25%' },
-    { title: 'Year', dataIndex: 'year', key: 'year', width: '25%' },
-    { title: 'Quartal', dataIndex: 'quartal', key: 'quartal', width: '15%' },
-    { title: 'Teachers', dataIndex: 'teachers', key: 'teachers', width: '25%' },
-    {
-      title: 'Action',
-      key: 'action',
-      render: () => (
-        <Button type='primary' className='btn'>
-          <FaEye />
-        </Button>
-      ),
-      width: '10%',
-    },
-  ];
-
   const data = [
     {
       key: '1',
@@ -38,6 +19,25 @@ const PedagogicalDocuments = () => {
       year: '2021',
       quartal: 'Q1',
       teachers: 'Marko Marić',
+    },
+  ];
+
+  const [form] = Form.useForm();
+  const [filteredData, setFilteredData] = useState(data);
+  const columns = [
+    { title: 'Group', dataIndex: 'group', key: 'group', width: '25%' },
+    { title: 'Year', dataIndex: 'year', key: 'year', width: '25%' },
+    { title: 'Quartal', dataIndex: 'quartal', key: 'quartal', width: '15%' },
+    { title: 'Teachers', dataIndex: 'teachers', key: 'teachers', width: '25%' },
+    {
+      title: 'Action',
+      key: 'action',
+      render: () => (
+        <Button type='primary' className='btn'>
+          <FaEye />
+        </Button>
+      ),
+      width: '10%',
     },
   ];
 

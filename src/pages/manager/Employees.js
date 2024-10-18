@@ -3,13 +3,20 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import Highlighter from 'react-highlight-words';
 import { LayoutContext } from '../context/LayoutContext';
+import { useNavigate } from 'react-router-dom';
 
 const Employees = () => {
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const { activeTab, isModalOpen, setIsModalOpen } = useContext(LayoutContext);
+  const { setActiveTab } = useContext(LayoutContext);
   const searchInput = useRef(null);
+  const navigate = useNavigate();
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    setActiveTab('Employees');
+  }, [setActiveTab]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -30,6 +37,14 @@ const Employees = () => {
 
   const handleSubmit = (values) => {
     console.log(values);
+  };
+
+  const handleClick = (record) => {
+    // navigate(`/employees/${record.id}`);
+    setActiveTab('Employee');
+    navigate(`/employees/${record.key}`);
+
+    console.log(record);
   };
 
   // HARDCODED DATA
@@ -226,7 +241,16 @@ const Employees = () => {
 
   return (
     <div className='employees'>
-      <Table columns={columns} dataSource={data} className='table' />
+      <Table
+        columns={columns}
+        dataSource={data}
+        className='table'
+        onRow={(record) => {
+          return {
+            onClick: () => handleClick(record), // Attach click event here
+          };
+        }}
+      />
       {activeTab === 'Employees' && (
         <Modal
           open={isModalOpen}

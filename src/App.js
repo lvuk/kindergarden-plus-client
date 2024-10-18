@@ -26,6 +26,8 @@ import Groups from './pages/manager/Groups';
 import MyKindergarden from './pages/manager/MyKindergarden';
 import PedagogicalDocuments from './pages/manager/PedagogicalDocuments';
 import WorkDays from './pages/manager/WorkDays';
+import EmployeeDetails from './pages/manager/details/EmployeeDetails';
+import ChildDetails from './pages/manager/details/ChildDetails';
 
 function App() {
   const { user } = useUserContext();
@@ -95,6 +97,9 @@ function App() {
               element={<PedagogicalDocuments />}
             />
             <Route path='work-days' element={<WorkDays />} />
+            {/* DETAILS */}
+            <Route path='employees/:id' element={<EmployeeDetails />} />
+            <Route path='children/:id' element={<ChildDetails />} />
           </Route>
         </Route>
       </Routes>

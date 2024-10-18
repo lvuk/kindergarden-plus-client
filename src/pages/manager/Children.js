@@ -5,6 +5,7 @@ import Highlighter from 'react-highlight-words';
 import { LayoutContext } from '../context/LayoutContext';
 import { Option } from 'antd/es/mentions';
 import DebounceSelect from '../../components/manager/DebounceSelect';
+import { useNavigate } from 'react-router-dom';
 
 const Children = () => {
   const [searchText, setSearchText] = useState('');
@@ -12,22 +13,14 @@ const Children = () => {
   const [value, setValue] = useState([]);
   const { isModalOpen, setIsModalOpen, activeTab } = useContext(LayoutContext);
   const searchInput = useRef(null);
+  const { setActiveTab } = useContext(LayoutContext);
+  const navigate = useNavigate();
   const [form] = Form.useForm();
 
   useEffect(() => {
     setIsModalOpen(false);
+    setActiveTab('Children');
   }, []);
-
-  const handleSearch = (selectedKeys, confirm, dataIndex) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
-  };
-  const handleReset = (clearFilters, confirm) => {
-    clearFilters();
-    setSearchText('');
-    confirm();
-  };
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
@@ -178,14 +171,28 @@ const Children = () => {
     },
   ];
 
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+    setSearchText(selectedKeys[0]);
+    setSearchedColumn(dataIndex);
+  };
+  const handleReset = (clearFilters, confirm) => {
+    clearFilters();
+    setSearchText('');
+    confirm();
+  };
   const handleCancel = () => {
     setIsModalOpen(false);
     form.resetFields();
   };
-
   const handleSubmit = (values) => {
     console.log(values);
     // setIsModalOpen(false);
+  };
+  const handleClick = (record) => {
+    navigate(`/children/${record.key}`);
+    setActiveTab('Child');
+    console.log(record);
   };
 
   const fetchUserList = (lastName) => {
@@ -220,7 +227,16 @@ const Children = () => {
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} className='table' />
+      <Table
+        columns={columns}
+        dataSource={data}
+        className='table'
+        onRow={(record) => {
+          return {
+            onClick: () => handleClick(record),
+          };
+        }}
+      />
       {activeTab === 'Children' && (
         <Modal
           open={isModalOpen}
