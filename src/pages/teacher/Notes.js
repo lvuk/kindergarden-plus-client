@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../../stylesheets/teacher/notes.scss';
 import { Button, Form, Input, Modal, Space, Table } from 'antd';
 import { ExclamationCircleFilled } from '@ant-design/icons';
@@ -6,6 +6,7 @@ import { FaEye, FaPlus, FaTrashCan } from 'react-icons/fa6';
 import { FaEdit } from 'react-icons/fa';
 import moment from 'moment';
 import TextArea from 'antd/es/input/TextArea';
+import { LayoutContext } from '../context/LayoutContext';
 
 const { confirm } = Modal;
 
@@ -14,6 +15,7 @@ const Notes = () => {
   const [modalTitle, setModalTitle] = useState('');
   const [form] = Form.useForm(); // Create form reference
   const [isShowMode, setIsShowMode] = useState(false);
+  const { isModalOpen, setIsModalOpen } = useContext(LayoutContext);
   const [record, setRecord] = useState(null);
   const [values, setValues] = useState({
     noteTitle: '',
@@ -22,13 +24,15 @@ const Notes = () => {
   });
 
   const handleNewModal = () => {
+    isShowMode(false);
+    setModalTitle('New Note');
     form.resetFields(); // Reset the form fields
     setValues({
       noteTitle: '',
       noteBody: '',
     });
-    setOpen(true);
-    setModalTitle('New Note');
+    // setOpen(true);
+    // setModalTitle('New Note');
   };
 
   const showDeleteConfirm = (record) => {
@@ -48,7 +52,7 @@ const Notes = () => {
   const showNoteModal = (record) => {
     setIsShowMode(true);
     setRecord(record);
-    setOpen(true);
+    setIsModalOpen(true);
     setValues({
       noteTitle: record.noteTitle,
       noteBody: record.noteBody,
@@ -66,13 +70,14 @@ const Notes = () => {
       updatedAt: moment().format('DD-MM-YYYY'),
     };
     setValues(updatedValues);
-    setOpen(true);
+    setIsModalOpen(true);
     form.setFieldsValue(updatedValues); // Set the form values for editing
   };
 
   const handleCancel = () => {
+    setModalTitle('');
     setIsShowMode(false);
-    setOpen(false);
+    setIsModalOpen(false);
     form.resetFields(); // Reset the form when the modal is closed
     setValues({
       noteTitle: '',
@@ -180,15 +185,9 @@ const Notes = () => {
 
   return (
     <div className='notes'>
-      <div>
-        <Button type='primary' className='btn' onClick={handleNewModal}>
-          <FaPlus /> New note
-        </Button>
-      </div>
-
       <Table columns={columns} dataSource={data} className='table' />
       <Modal
-        open={open}
+        open={isModalOpen}
         title={modalTitle}
         footer={null}
         onCancel={handleCancel}

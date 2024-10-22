@@ -78,6 +78,7 @@ function App() {
             <Route path='attendance' element={<Attendance />} />
             <Route path='work-log' element={<WorkLog />} />
             <Route path='notes' element={<Notes />} />
+            <Route path='my-group/children/:id' element={<ChildDetails />} />
           </Route>
           {/* PROTECTED ROUTES FOR PARENTS */}
           <Route element={<ProtectedRoutes requiredRole={['PARENT']} />}>

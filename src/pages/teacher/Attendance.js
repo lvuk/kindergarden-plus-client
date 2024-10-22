@@ -15,6 +15,7 @@ const Attendance = () => {
     },
   ]);
   const [isHidden, setIsHidden] = useState(true);
+
   const handleViewClick = (record) => {
     setRecord(record);
     setIsHidden(false);
