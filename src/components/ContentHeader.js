@@ -49,6 +49,13 @@ const ContentHeader = ({ activeTab }) => {
             Add new note
           </Button>
         )}
+
+        {activeTab === 'Attendance' && user.role === 'TEACHER' && (
+          <Button className='btn' onClick={handleClick}>
+            <FaPlus />
+            Add new attendance
+          </Button>
+        )}
       </div>
       <hr />
     </div>

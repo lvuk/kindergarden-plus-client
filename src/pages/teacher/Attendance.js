@@ -1,6 +1,7 @@
-import { Button, Select, Table } from 'antd';
-import React, { useState } from 'react';
+import { Button, DatePicker, Form, Modal, Radio, Select, Table } from 'antd';
+import React, { useContext, useState } from 'react';
 import '../../stylesheets/teacher/attendance.scss';
+import { LayoutContext } from '../context/LayoutContext';
 const { Option } = Select;
 
 const Attendance = () => {
@@ -14,7 +15,25 @@ const Attendance = () => {
       category: 'absent',
     },
   ]);
+  const { isModalOpen, setIsModalOpen } = useContext(LayoutContext);
   const [isHidden, setIsHidden] = useState(true);
+  const [children, setChildren] = useState([
+    {
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
+      isPresent: false,
+      category: 'absent',
+    },
+    {
+      id: 2,
+      firstName: 'Jane',
+      lastName: 'Doe',
+      isPresent: false,
+      category: 'absent',
+    },
+  ]);
+  const [form] = Form.useForm();
 
   const handleViewClick = (record) => {
     setRecord(record);
@@ -23,6 +42,11 @@ const Attendance = () => {
 
   const handleSaveAttendance = () => {
     console.log(childAttendance);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
   };
 
   const data = [
@@ -135,6 +159,72 @@ const Attendance = () => {
     },
   ];
 
+  const handlePresenceChange = (isPresent, childId) => {
+    const updatedChildren = children.map((child) => {
+      if (child.id === childId) {
+        return {
+          ...child,
+          isPresent,
+          category: isPresent ? 'long' : 'absent', // Default to 'long' if present, 'absent' if not present
+        };
+      }
+      return child;
+    });
+    setChildren(updatedChildren);
+  };
+
+  const handleCategoryChange = (category, childId) => {
+    const updatedChildren = children.map((child) => {
+      if (child.id === childId) {
+        return { ...child, category };
+      }
+      return child;
+    });
+    setChildren(updatedChildren);
+  };
+
+  const newAttendanceColumns = [
+    {
+      title: 'First Name',
+      dataIndex: 'firstName',
+      key: 'firstName',
+    },
+    {
+      title: 'Last Name',
+      dataIndex: 'lastName',
+      key: 'lastName',
+    },
+    {
+      width: 15,
+      title: 'Presence',
+      key: 'isPresent',
+      render: (text, record) => (
+        <Radio.Group
+          onChange={(e) => handlePresenceChange(e.target.value, record.id)}
+          value={record.isPresent}
+        >
+          <Radio value={true}>Present</Radio>
+          <Radio value={false}>Absent</Radio>
+        </Radio.Group>
+      ),
+    },
+    {
+      title: 'Category',
+      key: 'category',
+      render: (text, record) => (
+        <Select
+          value={record.category}
+          onChange={(value) => handleCategoryChange(value, record.id)}
+          style={{ width: 120 }}
+          disabled={!record.isPresent} // Disable category selection if not present
+        >
+          <Option value='long'>Long</Option>
+          <Option value='short'>Short</Option>
+        </Select>
+      ),
+    },
+  ];
+
   const handleSelectionChange = (selectedRowKeys) => {
     const newData = childAttendance.map((item) => {
       if (selectedRowKeys.includes(item.id)) {
@@ -168,6 +258,30 @@ const Attendance = () => {
       .map((item) => item.id), // Select rows where isPresent is true
     onChange: handleSelectionChange,
     columnTitle: false, // This removes the header checkbox
+  };
+
+  const formItemLayout = {
+    labelCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 6,
+      },
+    },
+    wrapperCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 14,
+      },
+    },
+  };
+
+  const handleSubmit = (values) => {
+    console.log(values, children);
+    setIsModalOpen(false);
   };
 
   return (
@@ -213,6 +327,42 @@ const Attendance = () => {
         rowKey={'id'}
         size='small'
       />
+
+      <Modal
+        title='Add new attendance'
+        open={isModalOpen}
+        footer={null}
+        onCancel={handleCancel}
+        maskClosable={false}
+      >
+        <Form
+          {...formItemLayout}
+          onFinish={handleSubmit}
+          layout='vertical'
+          form={form}
+        >
+          <Form.Item
+            name='date'
+            label='Date: '
+            rules={[{ required: true, message: 'Please select a date' }]}
+          >
+            <DatePicker />
+          </Form.Item>
+
+          <Table
+            dataSource={children}
+            columns={newAttendanceColumns}
+            rowKey='id'
+            pagination={false}
+          />
+
+          <Form.Item style={{ marginTop: '1rem', textAlign: 'left' }}>
+            <Button type='primary' htmlType='submit'>
+              Save
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };
