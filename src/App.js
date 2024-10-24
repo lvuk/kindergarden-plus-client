@@ -60,8 +60,17 @@ function App() {
               }
             />
           </Route>
-          <Route path='inbox' element={<Inbox />} />
-          <Route path='events' element={<Events />} />
+
+          <Route
+            element={
+              <ProtectedRoutes
+                requiredRole={['PARENT', 'TEACHER', 'ADMIN', 'MANAGER']}
+              />
+            }
+          >
+            <Route path='inbox' element={<Inbox />} />
+            <Route path='events' element={<Events />} />
+          </Route>
 
           <Route
             element={<ProtectedRoutes requiredRole={['TEACHER', 'MANAGER']} />}

@@ -193,14 +193,19 @@ const Notes = () => {
         onCancel={handleCancel}
       >
         {!isShowMode ? (
-          <Form variant='filled' layout='vertical' form={form}>
+          <Form {...formItemLayout} variant='filled' form={form}>
             <Form.Item label='Title' name='noteTitle'>
               <Input />
             </Form.Item>
             <Form.Item label='Body' name='noteBody'>
               <TextArea />
             </Form.Item>
-            <Form.Item>
+            <Form.Item
+              wrapperCol={{
+                offset: 6,
+                span: 14,
+              }}
+            >
               <Button type='primary' htmlType='submit'>
                 Save
               </Button>

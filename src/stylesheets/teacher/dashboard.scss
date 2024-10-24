@@ -16,6 +16,14 @@
     grid-column: span 4;
   }
 
+  .grid-item:nth-child(4) {
+    grid-column: span 8;
+  }
+
+  .fc-multimonth-month {
+    width: 100% !important;
+  }
+
   .attendance,
   .work-log,
   .quick-note {

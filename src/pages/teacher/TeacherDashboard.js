@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../stylesheets/teacher/dashboard.scss';
 import { Button, notification, Result } from 'antd';
 import { FaPlus } from 'react-icons/fa';
@@ -9,6 +9,13 @@ const TeacherDashboard = () => {
   const [api, contextHolder] = notification.useNotification();
   const [attendance, setAttendance] = useState({});
   const [workLog, setWorkLog] = useState({});
+  const calendarRef = useRef(null);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      calendarRef.current.getApi().updateSize();
+    }
+  }, []);
 
   const openNotification = (event, placement) => {
     const formattedStart = formatEventDate(event.start);
@@ -95,12 +102,14 @@ const TeacherDashboard = () => {
       <div className='grid-item'>
         <h3>Events</h3>
         <FullCalendar
+          ref={calendarRef}
           initialEvents={events}
           eventClick={handleEventClick}
           headerToolbar={null}
           plugins={[multiMonthPlugin]}
           initialView='multiMonthSolo'
           height={'auto'}
+          style={{ width: '100% !important' }}
           views={{
             multiMonthSolo: {
               type: 'multiMonth',
@@ -110,7 +119,6 @@ const TeacherDashboard = () => {
         />
       </div>
       <div className='grid-item'>Item 5</div>
-      <div className='grid-item'>Item 6</div>
     </div>
   );
 };
