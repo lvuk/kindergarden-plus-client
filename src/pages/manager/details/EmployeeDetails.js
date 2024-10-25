@@ -1,5 +1,12 @@
+import { Avatar, Button, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
+import '../../../stylesheets/manager/details/employee.scss';
+import PersonalDataTab from '../../../components/teacher/PersonalDataTab';
+import EmployeeOverviewTab from '../../../components/manager/EmployeeOverviewTab';
+import EmploymentDetailsTab from '../../../components/manager/EmploymentDetailsTab';
+import NotesAndCommentsTab from '../../../components/manager/NotesAndCommentsTab';
 
 const EmployeeDetails = () => {
   const { id } = useParams();
@@ -31,10 +38,43 @@ const EmployeeDetails = () => {
     // };
   }, [id]); // Trigger the effect when `id` changes
 
+  const tabs = [
+    {
+      key: '1',
+      label: 'Overview',
+      children: <EmployeeOverviewTab />,
+    },
+    {
+      key: '2',
+      label: 'Personal information',
+      children: <PersonalDataTab />,
+    },
+    {
+      key: '3',
+      label: 'Employment Details',
+      children: <EmploymentDetailsTab />,
+    },
+    {
+      key: '4',
+      label: 'Notes and comments',
+      children: <NotesAndCommentsTab />,
+    },
+  ];
+
+  const onChange = (key) => {
+    console.log(key);
+  };
+
   return (
     <div className='employee-details'>
-      <h1>Employee details</h1>
-      <pre>{JSON.stringify(employee, null, 2)}</pre>
+      <Avatar shape='square' size={256} icon={<UserOutlined />} />
+      <Tabs
+        defaultActiveKey='1'
+        items={tabs}
+        onChange={onChange}
+        centered
+        className='tabs'
+      />
     </div>
   );
 };

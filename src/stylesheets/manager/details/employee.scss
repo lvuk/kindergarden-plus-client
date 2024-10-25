@@ -1,0 +1,13 @@
+@import '../../variables';
+
+.employee-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+
+  .tabs {
+    width: 90%;
+  }
+}
