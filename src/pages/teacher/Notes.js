@@ -35,7 +35,7 @@ const Notes = () => {
     // setModalTitle('New Note');
   };
 
-  const showDeleteConfirm = (record) => {
+  const showDeleteConfirm = (e, record) => {
     confirm({
       title: 'Do you want to delete this note?',
       icon: <ExclamationCircleFilled />,
@@ -47,6 +47,7 @@ const Notes = () => {
         console.log('Cancel');
       },
     });
+    e.stopPropagation();
   };
 
   const showNoteModal = (record) => {
@@ -62,7 +63,7 @@ const Notes = () => {
     form.setFieldsValue(record);
   };
 
-  const editNoteModal = (record) => {
+  const editNoteModal = (e, record) => {
     setModalTitle('Edit Note');
     const updatedValues = {
       noteTitle: record.noteTitle,
@@ -72,6 +73,7 @@ const Notes = () => {
     setValues(updatedValues);
     setIsModalOpen(true);
     form.setFieldsValue(updatedValues); // Set the form values for editing
+    e.stopPropagation();
   };
 
   const handleCancel = () => {
@@ -114,22 +116,15 @@ const Notes = () => {
         <Space size='small'>
           <Button
             type='primary'
-            className='btn'
-            onClick={() => showNoteModal(record)}
-          >
-            <FaEye />
-          </Button>
-          <Button
-            type='primary'
             className='btn btn-edit'
-            onClick={() => editNoteModal(record)}
+            onClick={(e) => editNoteModal(e, record)}
           >
             <FaEdit />
           </Button>
           <Button
             type='danger'
             className='btn btn-delete'
-            onClick={() => showDeleteConfirm(record)}
+            onClick={(e) => showDeleteConfirm(e, record)}
           >
             <FaTrashCan />
           </Button>
@@ -185,10 +180,19 @@ const Notes = () => {
 
   return (
     <div className='notes'>
-      <Table columns={columns} dataSource={data} className='table' />
+      <Table
+        columns={columns}
+        dataSource={data}
+        className='table'
+        onRow={(record) => {
+          return {
+            onClick: () => showNoteModal(record),
+          };
+        }}
+      />
       <Modal
         open={isModalOpen}
-        title={modalTitle}
+        title={modalTitle || 'New Note'}
         footer={null}
         onCancel={handleCancel}
       >

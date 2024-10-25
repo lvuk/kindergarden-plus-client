@@ -1,4 +1,12 @@
-.empty {
-  background-color: white;
-  padding: 3rem;
+.pedagogical-documents {
+  .empty {
+    background-color: white;
+    padding: 3rem;
+  }
+
+  .table {
+    .ant-table-cell-row-hover {
+      cursor: default !important;
+    }
+  }
 }

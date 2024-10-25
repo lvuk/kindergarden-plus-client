@@ -18,17 +18,19 @@ const Groups = () => {
   const { setActiveTab } = useContext(LayoutContext);
   const [form] = Form.useForm(); // Create form instance
   const [createForm] = Form.useForm(); // Create form instance
-  const showModal = (record) => {
+
+  const showModal = (event, record) => {
     setRecord(record);
     form.setFieldsValue(record); // Set form values when modal opens
     setOpen(true);
+    event.stopPropagation();
   };
 
   useEffect(() => {
     setActiveTab('Groups');
   }, [setActiveTab]);
 
-  const showDeleteConfirm = () => {
+  const showDeleteConfirm = (event) => {
     confirm({
       title: 'Are you sure delete this group?',
       icon: <ExclamationCircleFilled />,
@@ -43,6 +45,7 @@ const Groups = () => {
         console.log('Cancel');
       },
     });
+    event.stopPropagation();
   };
   const handleCancel = () => {
     form.resetFields(); // Reset form when modal is closed
@@ -76,10 +79,16 @@ const Groups = () => {
       key: 'action',
       render: (_, record) => (
         <Space size='small'>
-          <Button className='btn btn-edit' onClick={() => showModal(record)}>
+          <Button
+            className='btn btn-edit'
+            onClick={(e) => showModal(e, record)}
+          >
             <FaEdit />
           </Button>
-          <Button onClick={showDeleteConfirm} className='btn btn-delete'>
+          <Button
+            onClick={(e) => showDeleteConfirm(e)}
+            className='btn btn-delete'
+          >
             <FaTrashCan />
           </Button>
         </Space>

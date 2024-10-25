@@ -41,7 +41,7 @@ const PedagogicalDocuments = () => {
       title: 'Action',
       key: 'action',
       render: () => (
-        <Button type='primary' className='btn'>
+        <Button type='primary' className='btn' onClick={handleClick}>
           <FaEye />
         </Button>
       ),
@@ -134,11 +134,11 @@ const PedagogicalDocuments = () => {
           columns={columns}
           dataSource={filteredData.length ? filteredData : data}
           className='table'
-          onRow={(record) => {
-            return {
-              onClick: () => handleClick(record),
-            };
-          }}
+          //   onRow={(record) => {
+          //     return {
+          //       onClick: () => handleClick(record),
+          //     };
+          //   }}
         />
       ) : (
         <Empty className='empty table' />

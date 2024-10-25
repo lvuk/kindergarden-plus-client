@@ -3,6 +3,7 @@
   background-color: $primary-color;
   padding: 0; /* Ensure no extra padding on the sidebar itself */
   overflow: scroll;
+  max-width: 250px;
 
   .dflex {
     display: flex;
@@ -11,18 +12,21 @@
   }
 
   .hamburger-button {
-    font-size: 4rem;
+    font-size: 3rem;
     // padding-top: 15px;
     background-color: transparent;
     border: none;
     color: white;
     cursor: pointer;
     margin: auto;
+    // margin-left: 4rem;
+    margin-top: 0.5rem;
+    margin-right: 0rem; /* Space between icon and text */
   }
 
   h1 {
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     padding-left: 3rem;
     // padding-top: 15px;
@@ -46,9 +50,9 @@
     align-items: center;
     text-decoration: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
-    padding: 1.5rem 2rem; /* Same padding for links */
+    padding: 1rem 1.5rem; /* Same padding for links */
     width: 100%; /* Make link span full width of parent */
     transition: background 0.3s; /* Smooth transition for background */
     box-sizing: border-box; /* Ensure padding is included in width */
@@ -92,9 +96,9 @@
     align-items: center; /* Align items vertically center */
     text-decoration: none;
     color: $orange-color;
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
-    padding: 1.5rem 2rem; /* Same padding as .link */
+    padding: 1rem 1.5rem; /* Same padding as .link */
     width: 100%; /* Ensure full width if needed */
     transition: background 0.3s; /* Smooth transition for background */
     box-sizing: border-box; /* Ensure padding is included in width */
