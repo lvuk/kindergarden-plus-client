@@ -1,5 +1,14 @@
+import { Avatar, Descriptions, Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
+import '../../../components/child/ChildOverviewTab';
+import ChildOverviewTab from '../../../components/child/ChildOverviewTab';
+import PersonalInformationTab from '../../../components/child/PersonalInformationTab';
+import ChildAttendanceTab from '../../../components/child/ChildAttendanceTab';
+import NotesAndCommentsTab from '../../../components/manager/NotesAndCommentsTab';
+import '../../../stylesheets/components/child-details.scss';
+import AchievementsTab from '../../../components/teacher/AchievementsTab';
 
 const ChildDetails = () => {
   const { id } = useParams();
@@ -58,10 +67,49 @@ const ChildDetails = () => {
     });
   }, [id]);
 
+  const tabs = [
+    {
+      key: '1',
+      label: 'Overview',
+      children: <ChildOverviewTab />,
+    },
+    {
+      key: '2',
+      label: 'Personal information',
+      children: <PersonalInformationTab />,
+    },
+    {
+      key: '3',
+      label: 'Attendance',
+      children: <ChildAttendanceTab />,
+    },
+    {
+      key: '4',
+      label: 'Achievements',
+      children: <AchievementsTab />,
+    },
+    {
+      key: '5',
+      label: 'Notes and comments',
+      children: <NotesAndCommentsTab />,
+    },
+  ];
+
+  const onChange = (key) => {
+    console.log(key);
+  };
+
   return (
     <div className='child-details'>
-      <h1>Child details</h1>
-      <pre>{JSON.stringify(child, null, 2)}</pre>
+      <Avatar shape='square' size={256} icon={<UserOutlined />} />
+      <h2>First Name Last Name</h2>
+      <Tabs
+        defaultActiveKey='1'
+        items={tabs}
+        onChange={onChange}
+        centered
+        className='tabs'
+      />
     </div>
   );
 };

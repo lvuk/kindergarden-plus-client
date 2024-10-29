@@ -1,7 +1,7 @@
 import { Badge, Descriptions } from 'antd';
 import React from 'react';
 
-const PersonalDataTab = () => {
+const PersonalInformationTab = () => {
   const items = [
     {
       key: '1',
@@ -41,4 +41,4 @@ const PersonalDataTab = () => {
   );
 };
 
-export default PersonalDataTab;
+export default PersonalInformationTab;
