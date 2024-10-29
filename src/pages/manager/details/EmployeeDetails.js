@@ -68,6 +68,7 @@ const EmployeeDetails = () => {
   return (
     <div className='employee-details'>
       <Avatar shape='square' size={256} icon={<UserOutlined />} />
+      <h2>First Name Last Name</h2>
       <Tabs
         defaultActiveKey='1'
         items={tabs}
