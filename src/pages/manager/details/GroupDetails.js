@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Table, Tag } from 'antd';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import '../../../stylesheets/manager/details/groups.scss';
+import { LayoutContext } from '../../context/LayoutContext';
 
 const GroupDetails = () => {
   const { id } = useParams();
   const [group, setGroup] = useState(null);
+  const { setActiveTab } = useContext(LayoutContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setGroup({
@@ -83,10 +88,100 @@ const GroupDetails = () => {
     });
   }, [id]);
 
+  const columns = [
+    {
+      title: 'First name',
+      dataIndex: 'firstName',
+      key: 'firstName',
+      sorter: (a, b) => a.firstName.localeCompare(b.firstName),
+    },
+    {
+      title: 'Last name',
+      dataIndex: 'lastName',
+      key: 'lastName',
+      sorter: (a, b) => a.lastName.localeCompare(b.lastName),
+    },
+    {
+      title: 'Group',
+      dataIndex: 'group',
+      key: 'group',
+      render: (group) => {
+        return <Tag color='blue'>{group}</Tag>;
+      },
+    },
+  ];
+
+  const childrenData = [
+    {
+      id: 1,
+      firstName: 'Ivan',
+      lastName: 'Ivic',
+      group: 'Bears',
+    },
+    {
+      id: 2,
+      firstName: 'Marko',
+      lastName: 'Markovic',
+      group: 'Bears',
+    },
+    {
+      id: 3,
+      firstName: 'Ana',
+      lastName: 'Anic',
+      group: 'Bears',
+    },
+    {
+      id: 4,
+      firstName: 'Ivana',
+      lastName: 'Ivanic',
+      group: 'Bears',
+    },
+  ];
+
+  const handleClick = (record) => {
+    navigate(`/children/${record.id}`);
+    setActiveTab('Child');
+    console.log(record);
+  };
+
   return (
     <div className='group-details'>
-      <h1>Group details</h1>
-      <pre>{JSON.stringify(group, null, 2)}</pre>
+      <div className='title'>
+        <h1>
+          Group name: <b>BEARS</b>
+        </h1>
+      </div>
+      <div className='d-flex'>
+        <div className='item'>
+          <h2>Teacher #1</h2>
+          <h3>
+            Name: <b>Luka Vuk</b>
+          </h3>
+          <h3>
+            PIN: <b>8484929484918</b>
+          </h3>
+        </div>
+        <div className='item'>
+          <h2>Teacher #2</h2>
+          <h3>
+            Name: <b>Jane Doe</b>
+          </h3>
+          <h3>
+            PIN: <b>438484719475</b>
+          </h3>
+        </div>
+      </div>
+      <Table
+        columns={columns}
+        dataSource={childrenData}
+        className='table'
+        title={() => <h1>Children</h1>}
+        onRow={(record) => {
+          return {
+            onClick: () => handleClick(record),
+          };
+        }}
+      />
     </div>
   );
 };

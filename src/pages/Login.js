@@ -29,7 +29,6 @@ const Login = () => {
     try {
       // Perform login and get the response
       const response = await login({ ...values });
-
       // Close loading message and show success
       messageApi.destroy();
       message.success('Login successful!', 2.5);

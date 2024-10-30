@@ -24,7 +24,7 @@
   .grid-item {
     grid-column: span 4;
     background-color: white; /* White background for the items */
-    padding: 20px; /* Padding inside the items */
+    // padding: 20px; /* Padding inside the items */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow for a 3D effect */
     border-radius: 8px; /* Rounded corners for a smooth look */
     min-height: 300px;
@@ -38,5 +38,17 @@
 
   .diet {
     color: red;
+  }
+
+  .title {
+    background-color: $primary-color;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px 10px 0px 0px;
+    margin-bottom: 1rem;
+  }
+
+  .body {
+    padding: 1rem;
   }
 }
